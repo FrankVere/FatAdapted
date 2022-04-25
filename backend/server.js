@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const { getRecipes } = require("./handlers");
+const { getRecipes, getRecipeInfo } = require("./handlers");
 
 const PORT = 8000;
 
@@ -24,6 +24,7 @@ express()
 
   //REST Endpoints//
   .get("/get-recipes/", getRecipes)
+  //   .get("/get-recipe-info/", getRecipeInfo)
 
   .get("*", (req, res) => {
     res.status(404).json({
