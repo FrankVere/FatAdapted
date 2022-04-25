@@ -13,7 +13,6 @@ const Homepage = () => {
         <h1>hello</h1>
         <LoginButton />
       </div>
-      ;
     </>
   );
 };

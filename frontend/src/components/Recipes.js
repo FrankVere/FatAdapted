@@ -25,6 +25,7 @@ const Recipes = () => {
 
   return (
     <Container>
+      <h1>hi</h1>
       <Wrapper>
         <input
           type="number"
