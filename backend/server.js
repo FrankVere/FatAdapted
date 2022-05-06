@@ -5,6 +5,7 @@ const {
   getRecipes,
   getSingleRecipeInfo,
   postUserHandler,
+  postLikedRecipe,
 } = require("./handlers");
 
 const PORT = 8000;
@@ -28,8 +29,9 @@ express()
 
   //REST Endpoints//
   .get("/get-recipes/", getRecipes)
-  .get("/get-single-recipe-info/:_id", getSingleRecipeInfo)
+  .get("/get-single-recipe-info/:_id/", getSingleRecipeInfo)
   .post("/post-user/", postUserHandler)
+  .post("/post-liked-recipe/", postLikedRecipe)
 
   .get("*", (req, res) => {
     res.status(404).json({

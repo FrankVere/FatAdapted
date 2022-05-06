@@ -11,14 +11,8 @@ function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   const {
-    state: { likedRecipes },
-    actions: { getAllMeals, updateLikedRecipes },
+    actions: { getAllMeals },
   } = useContext(MealContext);
-
-  useEffect(() => {
-    const getUserRecipes = localStorage.getItem("likedRecipes");
-    getUserRecipes ?? updateLikedRecipes(getUserRecipes);
-  }, [likedRecipes.length]);
 
   useEffect(() => {
     fetch("/get-recipes/", {

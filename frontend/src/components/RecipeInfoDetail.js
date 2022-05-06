@@ -4,23 +4,23 @@ import { MealContext } from "../MealContext";
 
 const RecipeInfoDetail = () => {
   const {
-    state: { singleRecipeInfo, likedRecipes },
-    actions: { updateLikedRecipes },
+    state: { singleRecipeInfo },
+    // actions: { updateLikedRecipes },
   } = useContext(MealContext);
 
-  console.log("likedRecipes", likedRecipes);
+  // console.log("likedRecipes", likedRecipes);
 
-  const likedHandler = () => {
-    console.log("clicked");
-    const newLikedRecipe = [...likedRecipes];
-    updateLikedRecipes(newLikedRecipe.push(singleRecipeInfo.title));
-    const userRecipes = localStorage.setItem("likedRecipes", likedRecipes);
-  };
+  // const likedHandler = () => {
+  //   console.log("clicked");
+  //   const newLikedRecipe = [...likedRecipes];
+  //   updateLikedRecipes(newLikedRecipe.push(singleRecipeInfo.title));
+  //   const userRecipes = localStorage.setItem("likedRecipes", likedRecipes);
+  // };
   return (
     <div>
       {singleRecipeInfo.title}
       <img src={singleRecipeInfo.image} />
-      <button onClick={likedHandler}>Liked</button>
+      <button>Liked</button>
     </div>
   );
 };

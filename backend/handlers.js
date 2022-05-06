@@ -30,7 +30,7 @@ const getRecipes = async (req, res) => {
 
 const getSingleRecipeInfo = async (req, res) => {
   const _id = req.params._id;
-  console.log(req.params);
+
   try {
     const result = await request(
       `https://api.spoonacular.com/recipes/${_id}/information?apiKey=${SPOONACULAR_API_KEY}`,
@@ -72,8 +72,36 @@ const postUserHandler = async (req, res) => {
   }
 };
 
+const postLikedRecipe = async (req, res) => {
+  const { email, _id } = req.body;
+  try {
+    const client = await new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("FatAdapted");
+    const recipeExists = await db
+      .collection("users")
+      .findOne({ likedRecipes: _id });
+    if (recipeExists) {
+      return res
+        .status(400)
+        .json({ status: 400, message: "Recipe already liked!" });
+    } else {
+      await db
+        .collection("users")
+        .updateOne({ email: email }, { $push: { likedRecipes: _id } });
+      return res.status(200).json({
+        status: 200,
+        message: "Successfully liked recipe!",
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({ status: 400, error: "Unexpected error" });
+  }
+};
+
 module.exports = {
   getRecipes,
   getSingleRecipeInfo,
   postUserHandler,
+  postLikedRecipe,
 };
