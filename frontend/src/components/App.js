@@ -3,11 +3,22 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Recipes from "./Recipes";
 import { MealContext } from "../MealContext";
 import Homepage from "./Homepage";
+import RecipeInfo from "./RecipeInfo";
+import Profile from "./Profile";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
   const {
-    actions: { getAllMeals },
+    state: { likedRecipes },
+    actions: { getAllMeals, updateLikedRecipes },
   } = useContext(MealContext);
+
+  useEffect(() => {
+    const getUserRecipes = localStorage.getItem("likedRecipes");
+    getUserRecipes ?? updateLikedRecipes(getUserRecipes);
+  }, [likedRecipes.length]);
 
   useEffect(() => {
     fetch("/get-recipes/", {
@@ -26,12 +37,25 @@ function App() {
       });
   }, []);
 
+  if (isAuthenticated) {
+    fetch("/post-user/", {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+    });
+  }
+
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route exacth path="/" element={<Homepage />} />
-          <Route exact path="/recipes" element={<Recipes />} />
+          <Route exact path="/" element={<Homepage />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/:recipeName" element={<RecipeInfo />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </div>

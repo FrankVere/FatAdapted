@@ -13,6 +13,11 @@ const Homepage = () => {
         <h1>hello</h1>
         <LoginButton />
       </div>
+      <div>
+        {allMeals.map((meal) => {
+          return <a href={meal.id}>{meal.title}</a>;
+        })}
+      </div>
     </>
   );
 };

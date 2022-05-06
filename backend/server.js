@@ -1,7 +1,11 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const { getRecipes, getRecipeInfo } = require("./handlers");
+const {
+  getRecipes,
+  getSingleRecipeInfo,
+  postUserHandler,
+} = require("./handlers");
 
 const PORT = 8000;
 
@@ -24,7 +28,8 @@ express()
 
   //REST Endpoints//
   .get("/get-recipes/", getRecipes)
-  //   .get("/get-recipe-info/", getRecipeInfo)
+  .get("/get-single-recipe-info/:_id", getSingleRecipeInfo)
+  .post("/post-user/", postUserHandler)
 
   .get("*", (req, res) => {
     res.status(404).json({
