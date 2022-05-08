@@ -50,22 +50,28 @@ const getSingleRecipeInfo = async (req, res) => {
 };
 
 const postUserHandler = async (req, res) => {
-  const { email } = req.body;
+  const { email, given_name, picture } = req.body;
+  console.log(req.body);
 
   try {
     const client = await new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("FatAdapted");
     const userExists = await db.collection("users").findOne({ email: email });
+
     if (userExists) {
-      return res
-        .status(400)
-        .json({ status: 400, message: "Email already registered!" });
+      return res.status(400).json({
+        status: 400,
+        message: "Email already registered!",
+        data: { email: email, given_name: given_name, picture: picture },
+      });
     } else {
       await db.collection("users").insertOne(req.body);
-      return res
-        .status(200)
-        .json({ status: 200, message: "Successfully created user!" });
+      return res.status(200).json({
+        status: 200,
+        message: "Successfully created user!",
+        data: { email: email, given_name: given_name, picture: picture },
+      });
     }
   } catch (error) {
     console.log(error);
@@ -73,14 +79,15 @@ const postUserHandler = async (req, res) => {
 };
 
 const postLikedRecipe = async (req, res) => {
-  const { email, _id } = req.body;
+  const { recipe, userInfo } = req.body;
+  console.log(userInfo);
   try {
     const client = await new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("FatAdapted");
     const recipeExists = await db
       .collection("users")
-      .findOne({ likedRecipes: _id });
+      .findOne({ likedRecipes: recipe.id });
     if (recipeExists) {
       return res
         .status(400)
@@ -88,13 +95,18 @@ const postLikedRecipe = async (req, res) => {
     } else {
       await db
         .collection("users")
-        .updateOne({ email: email }, { $push: { likedRecipes: _id } });
+        .updateOne(
+          { email: userInfo },
+          { $push: { likedRecipes: recipe.id.toString() } }
+        );
       return res.status(200).json({
         status: 200,
         message: "Successfully liked recipe!",
+        data: recipe.id,
       });
     }
   } catch (error) {
+    console.log(error);
     return res.status(400).json({ status: 400, error: "Unexpected error" });
   }
 };

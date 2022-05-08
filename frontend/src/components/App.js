@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Recipes from "./Recipes";
 import { MealContext } from "../MealContext";
@@ -32,6 +32,7 @@ function App() {
   }, []);
 
   if (isAuthenticated) {
+    console.log(user);
     fetch("/post-user/", {
       method: "POST",
       body: JSON.stringify(user),

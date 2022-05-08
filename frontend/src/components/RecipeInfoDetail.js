@@ -1,26 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { MealContext } from "../MealContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const RecipeInfoDetail = () => {
+  const { isAuthenticated, isLoading, user } = useAuth0();
+
+  if (isAuthenticated && !isLoading) {
+    console.log(user);
+  }
   const {
     state: { singleRecipeInfo },
-    // actions: { updateLikedRecipes },
   } = useContext(MealContext);
 
-  // console.log("likedRecipes", likedRecipes);
+  const handleLiked = () => {
+    fetch("/post-liked-recipe/", {
+      method: "POST",
+      body: JSON.stringify({ recipe: singleRecipeInfo, userInfo: user.email }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  };
 
-  // const likedHandler = () => {
-  //   console.log("clicked");
-  //   const newLikedRecipe = [...likedRecipes];
-  //   updateLikedRecipes(newLikedRecipe.push(singleRecipeInfo.title));
-  //   const userRecipes = localStorage.setItem("likedRecipes", likedRecipes);
-  // };
   return (
     <div>
       {singleRecipeInfo.title}
       <img src={singleRecipeInfo.image} />
-      <button>Liked</button>
+      <button onClick={handleLiked}>Liked</button>
     </div>
   );
 };
