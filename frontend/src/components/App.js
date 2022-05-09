@@ -6,6 +6,9 @@ import Homepage from "./Homepage";
 import RecipeInfo from "./RecipeInfo";
 import Profile from "./Profile";
 import { useAuth0 } from "@auth0/auth0-react";
+import HeaderBar from "./HeaderBar";
+import Navbar from "./Navbar";
+import LikedRecipes from "./LikedRecipes";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -32,7 +35,6 @@ function App() {
   }, []);
 
   if (isAuthenticated) {
-    console.log(user);
     fetch("/post-user/", {
       method: "POST",
       body: JSON.stringify(user),
@@ -46,12 +48,15 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+        <HeaderBar />
         <Routes>
           <Route exact path="/" element={<Homepage />} />
           <Route path="/recipes" element={<Recipes />} />
           <Route path="/:recipeName" element={<RecipeInfo />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/likedRecipes" element={<LikedRecipes />} />
         </Routes>
+        <Navbar />
       </BrowserRouter>
     </div>
   );

@@ -79,16 +79,17 @@ const postUserHandler = async (req, res) => {
 };
 
 const postLikedRecipe = async (req, res) => {
-  const { recipe, userInfo } = req.body;
+  const { id, userInfo } = req.body;
   console.log(userInfo);
   try {
     const client = await new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("FatAdapted");
-    const recipeExists = await db
+    const userExists = await db
       .collection("users")
-      .findOne({ likedRecipes: recipe.id });
-    if (recipeExists) {
+      .findOne({ email: userInfo });
+    console.log(userExists);
+    if (userExists.likedRecipes.includes(id.toString())) {
       return res
         .status(400)
         .json({ status: 400, message: "Recipe already liked!" });
@@ -97,12 +98,12 @@ const postLikedRecipe = async (req, res) => {
         .collection("users")
         .updateOne(
           { email: userInfo },
-          { $push: { likedRecipes: recipe.id.toString() } }
+          { $push: { likedRecipes: id.toString() } }
         );
       return res.status(200).json({
         status: 200,
         message: "Successfully liked recipe!",
-        data: recipe.id,
+        data: id,
       });
     }
   } catch (error) {
@@ -111,9 +112,28 @@ const postLikedRecipe = async (req, res) => {
   }
 };
 
+const getLikedRecipes = async (req, res) => {
+  const { email, id } = req.body;
+  try {
+    const client = await new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("FatAdapted");
+    db.collection("users").find();
+    return res
+      .status(200)
+      .json({ status: 200, message: "Successfully found liked recipe!" });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .json({ status: 400, error: "Couldn't locate liked recipe!" });
+  }
+};
+
 module.exports = {
   getRecipes,
   getSingleRecipeInfo,
+  getLikedRecipes,
   postUserHandler,
   postLikedRecipe,
 };

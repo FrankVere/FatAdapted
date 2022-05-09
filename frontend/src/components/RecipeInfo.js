@@ -6,14 +6,10 @@ import RecipeInfoDetail from "./RecipeInfoDetail";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const RecipeInfo = () => {
-  const { isAuthenticated, isLoading, user } = useAuth0();
   const {
     actions: { getSingleRecipeInfo },
   } = useContext(MealContext);
 
-  if (isAuthenticated && !isLoading) {
-    console.log(user);
-  }
   const {
     state: { singleRecipeInfo },
   } = useContext(MealContext);

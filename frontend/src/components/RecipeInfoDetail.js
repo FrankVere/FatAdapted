@@ -12,11 +12,17 @@ const RecipeInfoDetail = () => {
   const {
     state: { singleRecipeInfo },
   } = useContext(MealContext);
+  console.log(user);
+  const id = singleRecipeInfo.id;
+  const userInfo = user.email;
 
   const handleLiked = () => {
     fetch("/post-liked-recipe/", {
       method: "POST",
-      body: JSON.stringify({ recipe: singleRecipeInfo, userInfo: user.email }),
+      body: JSON.stringify({
+        id,
+        userInfo,
+      }),
       headers: {
         "Content-type": "application/json",
       },
