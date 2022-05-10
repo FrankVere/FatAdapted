@@ -31,7 +31,7 @@ express()
   //REST Endpoints//
   .get("/get-recipes/", getRecipes)
   .get("/get-single-recipe-info/:_id/", getSingleRecipeInfo)
-  .get("/get-liked-recipes/", getLikedRecipes)
+  .get("/get-liked-recipes/:userInfo/", getLikedRecipes)
   .post("/post-user/", postUserHandler)
   .post("/post-liked-recipe/", postLikedRecipe)
 

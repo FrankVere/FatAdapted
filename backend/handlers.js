@@ -113,15 +113,19 @@ const postLikedRecipe = async (req, res) => {
 };
 
 const getLikedRecipes = async (req, res) => {
-  const { email, id } = req.body;
+  const { userInfo } = req.params;
   try {
     const client = await new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("FatAdapted");
-    db.collection("users").find();
-    return res
-      .status(200)
-      .json({ status: 200, message: "Successfully found liked recipe!" });
+    const userExists = await db
+      .collection("users")
+      .findOne({ email: userInfo });
+    return res.status(200).json({
+      status: 200,
+      message: "Successfully found liked recipe!",
+      data: userExists.likedRecipes,
+    });
   } catch (error) {
     console.log(error);
     return res

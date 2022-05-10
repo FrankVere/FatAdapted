@@ -12,7 +12,7 @@ const RecipeInfoDetail = () => {
   const {
     state: { singleRecipeInfo },
   } = useContext(MealContext);
-  console.log(user);
+
   const id = singleRecipeInfo.id;
   const userInfo = user.email;
 
