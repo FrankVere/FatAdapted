@@ -134,10 +134,43 @@ const getLikedRecipes = async (req, res) => {
   }
 };
 
+const postMealPlan = async (req, res) => {
+  const { userInfo, weeklyMealPlan } = req.body;
+  try {
+    const client = await new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("FatAdapted");
+    const userExists = await db
+      .collection("users")
+      .findOne({ email: userInfo });
+    if (userExists) {
+      await db
+        .collection("users")
+        .updateOne(
+          { email: userInfo },
+          { $push: { mealPlan: weeklyMealPlan } }
+        );
+      return res
+        .status(200)
+        .json({ status: 200, message: "Successfully posted meal plan!" });
+    } else {
+      return res
+        .status(400)
+        .json({ status: 400, error: "Couldn't find user!" });
+    }
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .json({ status: 400, error: "Couldn't post meal plan!" });
+  }
+};
+
 module.exports = {
   getRecipes,
   getSingleRecipeInfo,
   getLikedRecipes,
   postUserHandler,
   postLikedRecipe,
+  postMealPlan,
 };
