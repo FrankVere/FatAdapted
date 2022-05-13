@@ -8,6 +8,7 @@ const {
   postLikedRecipe,
   getLikedRecipes,
   postMealPlan,
+  getMealPlanRecipes,
 } = require("./handlers");
 
 const PORT = 8000;
@@ -33,6 +34,7 @@ express()
   .get("/get-recipes/", getRecipes)
   .get("/get-single-recipe-info/:_id/", getSingleRecipeInfo)
   .get("/get-liked-recipes/:userInfo/", getLikedRecipes)
+  .post("/get-meal-plan/", getMealPlanRecipes)
   .post("/post-user/", postUserHandler)
   .post("/post-liked-recipe/", postLikedRecipe)
   .post("/post-meal-plan/", postMealPlan)

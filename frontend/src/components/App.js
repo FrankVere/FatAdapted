@@ -1,14 +1,15 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Recipes from "./Recipes";
 import { MealContext } from "../MealContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import Recipes from "./Recipes";
 import Homepage from "./Homepage";
 import RecipeInfo from "./RecipeInfo";
 import Profile from "./Profile";
-import { useAuth0 } from "@auth0/auth0-react";
 import HeaderBar from "./HeaderBar";
 import Navbar from "./Navbar";
 import LikedRecipes from "./LikedRecipes";
+import MealPlan from "./MealPlan";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -54,7 +55,8 @@ function App() {
           <Route path="/recipes" element={<Recipes />} />
           <Route path="/:recipeName" element={<RecipeInfo />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/likedRecipes" element={<LikedRecipes />} />
+          <Route path="/:likedRecipes" element={<LikedRecipes />} />
+          <Route exact path="/mealPlan" element={<MealPlan />} />
         </Routes>
         <Navbar />
       </BrowserRouter>

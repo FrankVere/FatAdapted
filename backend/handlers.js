@@ -33,7 +33,7 @@ const getSingleRecipeInfo = async (req, res) => {
 
   try {
     const result = await request(
-      `https://api.spoonacular.com/recipes/${_id}/information?apiKey=${SPOONACULAR_API_KEY}`,
+      `https://api.spoonacular.com/recipes/${_id}/information?includeNutrition=true&apiKey=${SPOONACULAR_API_KEY}`,
       { headers: { Accept: "application/json" } }
     );
     return res.status(200).json({
@@ -136,6 +136,7 @@ const getLikedRecipes = async (req, res) => {
 
 const postMealPlan = async (req, res) => {
   const { userInfo, weeklyMealPlan } = req.body;
+  console.log("hi", req.body);
   try {
     const client = await new MongoClient(MONGO_URI, options);
     await client.connect();
@@ -166,6 +167,28 @@ const postMealPlan = async (req, res) => {
   }
 };
 
+const getMealPlanRecipes = async (req, res) => {
+  const { userInfo } = req.body;
+  try {
+    const client = await new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("FatAdapted");
+    const userExists = await db
+      .collection("users")
+      .findOne({ email: userInfo });
+    return res.status(200).json({
+      status: 200,
+      message: "Successfully found meal plan recipe!",
+      data: userExists.mealPlan,
+    });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .json({ status: 400, error: "Couldn't locate meal plan recipes!" });
+  }
+};
+
 module.exports = {
   getRecipes,
   getSingleRecipeInfo,
@@ -173,4 +196,5 @@ module.exports = {
   postUserHandler,
   postLikedRecipe,
   postMealPlan,
+  getMealPlanRecipes,
 };

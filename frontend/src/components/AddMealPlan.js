@@ -1,24 +1,39 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
+import { useAuth0 } from "@auth0/auth0-react";
 import { MealContext } from "../MealContext";
 
 const AddMealPlan = () => {
   const {
-    state: { mealPlan },
+    state: { mealPlan, singleRecipeInfo },
     actions: { updateMealPlan },
   } = useContext(MealContext);
 
+  const { user, isLoading } = useAuth0();
+  const userInfo = user.email;
+  const weeklyMealPlan = mealPlan;
   const [selectedDay, setSelectedDay] = useState();
-
+  const [addMealPlanButton, setAddMealPlanButton] = useState(false);
   const handleSelectedDay = (e) => {
     setSelectedDay(e.target.value);
   };
 
   const handleAddMealPlan = () => {
-    updateMealPlan({ day: selectedDay, meal: "pizza" });
+    updateMealPlan({ day: selectedDay, meal: singleRecipeInfo.id });
+    setAddMealPlanButton(!addMealPlanButton);
   };
 
   console.log("day", mealPlan);
+
+  useEffect(() => {
+    fetch("/post-meal-plan/", {
+      method: "POST",
+      body: JSON.stringify({ userInfo, weeklyMealPlan }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  }, [addMealPlanButton]);
 
   return (
     <>

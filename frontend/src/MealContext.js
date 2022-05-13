@@ -36,7 +36,9 @@ function reducer(state, action) {
       };
     }
     case "updateMealPlan": {
-      state.mealPlan[action.data.day].push(action.data.meal);
+      if (!state.mealPlan[action.data.day].includes(action.data.meal)) {
+        state.mealPlan[action.data.day].push(action.data.meal);
+      }
       return {
         ...state,
       };
