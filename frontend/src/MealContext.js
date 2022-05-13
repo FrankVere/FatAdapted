@@ -36,12 +36,9 @@ function reducer(state, action) {
       };
     }
     case "updateMealPlan": {
+      state.mealPlan[action.data.day].push(action.data.meal);
       return {
         ...state,
-        mealPlan: [
-          ...mealPlan,
-          [...mealPlan[action.data.day], action.data.meal],
-        ],
       };
     }
   }

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { MealContext } from "../MealContext";
+import AddMealPlan from "./AddMealPlan";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const RecipeInfoDetail = () => {
@@ -34,6 +35,7 @@ const RecipeInfoDetail = () => {
       {singleRecipeInfo.title}
       <img src={singleRecipeInfo.image} />
       <button onClick={handleLiked}>Liked</button>
+      <AddMealPlan />
     </div>
   );
 };
