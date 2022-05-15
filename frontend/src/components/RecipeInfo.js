@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { MealContext } from "../MealContext";
 import { useParams } from "react-router-dom";
@@ -15,8 +15,11 @@ const RecipeInfo = () => {
   } = useContext(MealContext);
 
   const { recipeName } = useParams();
+  const _id = singleRecipeInfo.id;
+  const [imgSrc, setImgSrc] = useState("");
+  const [ingredientImgSrc, setIngredientImgSrc] = useState("");
 
-  useEffect(() => {
+  const getSingleRecipe = () => {
     fetch(`/get-single-recipe-info/${recipeName}`, {
       method: "GET",
       headers: {
@@ -28,11 +31,48 @@ const RecipeInfo = () => {
       .then((data) => {
         getSingleRecipeInfo(data.data);
       });
-  }, []);
+  };
+
+  const getNutritonLabel = () => {
+    fetch(
+      `https://api.spoonacular.com/recipes/${_id}/nutritionLabel.png?apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "image/png",
+        },
+      }
+    ).then((data) => {
+      setImgSrc(data.url);
+    });
+  };
+
+  const getIngredientsImages = () => {
+    fetch(
+      `https://api.spoonacular.com/recipes/${_id}/ingredientWidget.png?apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "image/png",
+          "Content-Type": "image/png",
+        },
+      }
+    ).then((data) => {
+      setIngredientImgSrc(data.url);
+    });
+  };
+
+  useEffect(() => {
+    getSingleRecipe();
+    getNutritonLabel();
+    getIngredientsImages();
+  }, [_id]);
 
   return (
     <div>
       <RecipeInfoDetail />
+      <img src={imgSrc} />
+      <img src={ingredientImgSrc} />
     </div>
   );
 };

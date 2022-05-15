@@ -55,7 +55,7 @@ function App() {
           <Route path="/recipes" element={<Recipes />} />
           <Route path="/:recipeName" element={<RecipeInfo />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/:likedRecipes" element={<LikedRecipes />} />
+          <Route path="/likedRecipes" element={<LikedRecipes />} />
           <Route exact path="/mealPlan" element={<MealPlan />} />
         </Routes>
         <Navbar />
