@@ -50,8 +50,30 @@ const getSingleRecipeInfo = async (req, res) => {
 };
 
 const postUserHandler = async (req, res) => {
-  const { email, given_name, picture } = req.body;
-  console.log(req.body);
+  const {
+    email,
+    given_name,
+    family_name,
+    nickname,
+    name,
+    updated_at,
+    email_verified,
+    sub,
+    picture,
+  } = req.body;
+  const likedRecipes = [];
+  const userObject = {
+    email: email,
+    given_name: given_name,
+    family_name: family_name,
+    nickname: nickname,
+    name: name,
+    updated_at: updated_at,
+    email_verified: email_verified,
+    sub: sub,
+    picture: picture,
+    likedRecipes: likedRecipes,
+  };
 
   try {
     const client = await new MongoClient(MONGO_URI, options);
@@ -66,11 +88,11 @@ const postUserHandler = async (req, res) => {
         data: { email: email, given_name: given_name, picture: picture },
       });
     } else {
-      await db.collection("users").insertOne(req.body);
+      await db.collection("users").insertOne(userObject);
       return res.status(200).json({
         status: 200,
         message: "Successfully created user!",
-        data: { email: email, given_name: given_name, picture: picture },
+        data: userObject,
       });
     }
   } catch (error) {
@@ -80,7 +102,7 @@ const postUserHandler = async (req, res) => {
 
 const postLikedRecipe = async (req, res) => {
   const { id, userInfo } = req.body;
-  console.log(userInfo);
+
   try {
     const client = await new MongoClient(MONGO_URI, options);
     await client.connect();
@@ -88,7 +110,6 @@ const postLikedRecipe = async (req, res) => {
     const userExists = await db
       .collection("users")
       .findOne({ email: userInfo });
-    console.log(userExists);
     if (userExists.likedRecipes.includes(id.toString())) {
       return res
         .status(400)
@@ -147,9 +168,9 @@ const postMealPlan = async (req, res) => {
     if (userExists) {
       await db
         .collection("users")
-        .updateOne(
+        .updateMany(
           { email: userInfo },
-          { $push: { mealPlan: weeklyMealPlan } }
+          { $set: { mealPlan: weeklyMealPlan } }
         );
       return res
         .status(200)
@@ -166,7 +187,7 @@ const postMealPlan = async (req, res) => {
       .json({ status: 400, error: "Couldn't post meal plan!" });
   }
 };
-
+// this is shaped as a post because the routes weren't working for some reason using params, it would give me errors inside a different component. initially had two gets using useParams but they were in conflict with one another/
 const getMealPlanRecipes = async (req, res) => {
   const { userInfo } = req.body;
   try {
@@ -189,6 +210,37 @@ const getMealPlanRecipes = async (req, res) => {
   }
 };
 
+const deleteLikedRecipe = async (req, res) => {
+  const { userInfo, id } = req.body;
+  try {
+    const client = await new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("FatAdapted");
+    const userExists = await db
+      .collection("users")
+      .findOne({ email: userInfo });
+    if (userExists) {
+      await db
+        .collection("users")
+        .updateOne(
+          { email: userInfo },
+          { $pull: { likedRecipes: id.toString() } }
+        );
+      return res
+        .status(200)
+        .json({ status: 200, message: "Liked recipe sucessfully removed!" });
+    } else {
+      return res
+        .status(400)
+        .json({ status: 400, message: "Couldn't remove liked recipe!" });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ status: 400, error: "Couldn't delete liked recipe!" });
+  }
+};
+
 module.exports = {
   getRecipes,
   getSingleRecipeInfo,
@@ -197,4 +249,5 @@ module.exports = {
   postLikedRecipe,
   postMealPlan,
   getMealPlanRecipes,
+  deleteLikedRecipe,
 };
