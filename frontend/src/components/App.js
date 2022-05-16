@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { MealContext } from "../MealContext";
 import { useAuth0 } from "@auth0/auth0-react";
-import Recipes from "./Recipes";
 import Homepage from "./Homepage";
 import RecipeInfo from "./RecipeInfo";
 import Profile from "./Profile";
@@ -52,7 +51,6 @@ function App() {
         <HeaderBar />
         <Routes>
           <Route exact path="/" element={<Homepage />} />
-          <Route path="/recipes" element={<Recipes />} />
           <Route path="/:recipeName" element={<RecipeInfo />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/likedRecipes" element={<LikedRecipes />} />

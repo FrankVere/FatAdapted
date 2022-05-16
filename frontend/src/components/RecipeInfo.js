@@ -15,7 +15,9 @@ const RecipeInfo = () => {
   } = useContext(MealContext);
 
   const { recipeName } = useParams();
+
   const _id = singleRecipeInfo.id;
+
   const [imgSrc, setImgSrc] = useState("");
   const [ingredientImgSrc, setIngredientImgSrc] = useState("");
 

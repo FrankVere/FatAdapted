@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useState } from "react";
 
 export const MealContext = createContext();
 //we set the state to hold 7 keys so we can add meals to the days we want in our mealplan//
@@ -19,6 +19,7 @@ const initialState = {
   mealPlan,
   singleRecipeInfo: {},
 };
+
 //Use this array to map over all meals inside the components using meals
 
 function reducer(state, action) {
