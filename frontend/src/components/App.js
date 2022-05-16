@@ -9,6 +9,7 @@ import HeaderBar from "./HeaderBar";
 import Navbar from "./Navbar";
 import LikedRecipes from "./LikedRecipes";
 import MealPlan from "./MealPlan";
+import GlobalStyles from "./GlobalStyles";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -48,6 +49,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+        <GlobalStyles />
         <HeaderBar />
         <Routes>
           <Route exact path="/" element={<Homepage />} />

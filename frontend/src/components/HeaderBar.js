@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const HeaderBar = () => {
+  const { user, isAuthenticated } = useAuth0();
+
   return (
     <Container>
       <LinksWrapper>
-        <NavLink to="/profile">Profile</NavLink>
-        <LoginButton />
-        <LogoutButton />
+        {" "}
+        {user && isAuthenticated ? <LogoutButton /> : <LoginButton />}
       </LinksWrapper>
     </Container>
   );

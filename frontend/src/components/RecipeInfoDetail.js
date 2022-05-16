@@ -30,14 +30,35 @@ const RecipeInfoDetail = () => {
     });
   };
 
+  //the .replace is used to remove the html tags included in the summary (ie, <br><ul> etc)
+
   return (
     <div>
-      {singleRecipeInfo.title}
-      <img src={singleRecipeInfo.image} />
+      <StyledHeader>{singleRecipeInfo.title} </StyledHeader>
+      <StyledSummary>
+        {singleRecipeInfo.summary.replace(/(<([^>]+)>)/gi, "")}
+      </StyledSummary>
+      <RecipeImageWrapper>
+        <StyledRecipeImage src={singleRecipeInfo.image} />
+      </RecipeImageWrapper>
       <button onClick={handleLiked}>Liked</button>
       <AddMealPlan />
     </div>
   );
 };
 
+const StyledHeader = styled.h2`
+  text-align: center;
+`;
+const StyledSummary = styled.p`
+  text-align: center;
+  text-decoration: none;
+`;
+const StyledRecipeImage = styled.img`
+  width: 250px;
+`;
+const RecipeImageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 export default RecipeInfoDetail;

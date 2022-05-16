@@ -70,13 +70,45 @@ const RecipeInfo = () => {
     getIngredientsImages();
   }, [_id]);
 
+  console.log(singleRecipeInfo);
+
   return (
     <div>
       <RecipeInfoDetail />
-      <img src={imgSrc} />
-      <img src={ingredientImgSrc} />
+      <LabelWrapper>
+        <StyledNutritionLabel src={imgSrc} />
+      </LabelWrapper>
+      <StyledHeader>Ingredients required! </StyledHeader>
+      <img src={ingredientImgSrc} style={{ width: "100vw", height: "300px" }} />
+      <Instructions>
+        {Object.keys(singleRecipeInfo).length > 0 && (
+          <ol>
+            {singleRecipeInfo.analyzedInstructions[0].steps.map((step) => (
+              <li>{step.step}</li>
+            ))}
+          </ol>
+        )}
+      </Instructions>
     </div>
   );
 };
 
+const Instructions = styled.div`
+  display: flex;
+  text-align: left;
+  margin-top: -200px;
+`;
+const StyledHeader = styled.h2`
+  display: flex;
+  justify-content: center;
+`;
+const StyledNutritionLabel = styled.img`
+  height: 340px;
+  width: 240px;
+`;
+
+const LabelWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 export default RecipeInfo;

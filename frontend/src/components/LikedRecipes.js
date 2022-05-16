@@ -45,17 +45,22 @@ const LikedRecipes = () => {
   console.log(allLikedRecipes);
 
   return (
-    <div>
-      <h1>My Liked Recipes!</h1>
-      {allLikedRecipes ? (
-        allLikedRecipes.map((likedRecipe) => {
-          return <img src={likedRecipe.image} />;
-        })
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
+    <Wrapper>
+      <div>
+        <h1>My Liked Recipes!</h1>
+        {allLikedRecipes ? (
+          allLikedRecipes.map((likedRecipe) => {
+            return <img src={likedRecipe.image} />;
+          })
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  height: 80vh;
+`;
 export default LikedRecipes;
