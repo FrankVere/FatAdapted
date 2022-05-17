@@ -74,21 +74,30 @@ const RecipeInfo = () => {
 
   return (
     <div>
-      <RecipeInfoDetail />
-      <LabelWrapper>
-        <StyledNutritionLabel src={imgSrc} />
-      </LabelWrapper>
-      <StyledHeader>Ingredients required! </StyledHeader>
-      <img src={ingredientImgSrc} style={{ width: "100vw", height: "300px" }} />
-      <Instructions>
-        {Object.keys(singleRecipeInfo).length > 0 && (
-          <ol>
-            {singleRecipeInfo.analyzedInstructions[0].steps.map((step) => (
-              <li>{step.step}</li>
-            ))}
-          </ol>
-        )}
-      </Instructions>
+      {Object.keys(singleRecipeInfo).length > 0 ? (
+        <>
+          <RecipeInfoDetail />
+          <LabelWrapper>
+            <StyledNutritionLabel src={imgSrc} />
+          </LabelWrapper>
+          <StyledHeader>Ingredients required! </StyledHeader>
+          <img
+            src={ingredientImgSrc}
+            style={{ width: "100vw", height: "300px" }}
+          />
+          <Instructions>
+            {Object.keys(singleRecipeInfo).length > 0 && (
+              <ol>
+                {singleRecipeInfo.analyzedInstructions[0].steps.map((step) => (
+                  <li>{step.step}</li>
+                ))}
+              </ol>
+            )}
+          </Instructions>
+        </>
+      ) : (
+        <div> Loading... </div>
+      )}
     </div>
   );
 };

@@ -34,15 +34,20 @@ const RecipeInfoDetail = () => {
 
   return (
     <div>
-      <StyledHeader>{singleRecipeInfo.title} </StyledHeader>
-      <StyledSummary>
-        {singleRecipeInfo.summary.replace(/(<([^>]+)>)/gi, "")}
-      </StyledSummary>
-      <RecipeImageWrapper>
-        <StyledRecipeImage src={singleRecipeInfo.image} />
-      </RecipeImageWrapper>
-      <button onClick={handleLiked}>Liked</button>
-      <AddMealPlan />
+      {Object.keys(singleRecipeInfo).length > 0 && (
+        <>
+          {" "}
+          <StyledHeader>{singleRecipeInfo.title} </StyledHeader>
+          <StyledSummary>
+            {singleRecipeInfo.summary.replace(/(<([^>]+)>)/gi, "")}
+          </StyledSummary>
+          <RecipeImageWrapper>
+            <StyledRecipeImage src={singleRecipeInfo.image} />
+          </RecipeImageWrapper>
+          <button onClick={handleLiked}>Liked</button>
+          <AddMealPlan />
+        </>
+      )}
     </div>
   );
 };

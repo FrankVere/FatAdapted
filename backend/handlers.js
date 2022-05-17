@@ -241,6 +241,89 @@ const deleteLikedRecipe = async (req, res) => {
   }
 };
 
+const getPreferenceRecipes = async (req, res) => {
+  const {
+    cuisine,
+    diet,
+    excludeCuisine,
+    intolerances,
+    includeIngredients,
+    excludeIngredients,
+    type,
+    maxReadyTime,
+    maxCarbs,
+    maxProtein,
+    maxCalories,
+    maxFat,
+    maxCaffeine,
+  } = req.query;
+  // `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOONACULAR_API_KEY}&diet={diet}&number=2&cuisine=${cuisine}&excludeCuisine=${excludeCuisine}&intolerances=${intolerances}&includeIngredients=${includeIngredients}&excludeIngredients=${excludeIngredients}&type=${type}&maxReadyTime=${maxReadyTime}&maxCarbs=${maxCarbs}&maxProtein=${maxProtein}&maxCalories=${maxCalories}&maxFat=${maxFat}&maxCaffeine=${maxCaffeine}`
+  try {
+    //re-add keto/paleo hardcoded
+    const result = await request(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOONACULAR_API_KEY}&number=3&cuisine=${cuisine}`,
+      { headers: { Accept: "application/json" } }
+    );
+    return res.status(200).json({
+      status: 200,
+      message: "Succesfully retrieved data!",
+      data: JSON.parse(result),
+    });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .json({ status: 400, message: "Something went wrong!" });
+  }
+};
+
+const postUserPreference = async (req, res) => {
+  const { userInfo, query } = req.body;
+
+  try {
+    const client = await new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("FatAdapted");
+    const userExists = await db
+      .collection("users")
+      .findOne({ email: userInfo });
+    if (userExists) {
+      await db
+        .collection("users")
+        .updateOne({ email: userInfo }, { $push: { preferences: query } });
+      return res.status(200).json({
+        status: 200,
+        message: "Successfully added preferences!",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ status: 400, error: "Unexpected error" });
+  }
+};
+
+const getUserPreferences = async (req, res) => {
+  const { userInfo } = req.params;
+  try {
+    const client = await new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("FatAdapted");
+    const userExists = await db
+      .collection("users")
+      .findOne({ email: userInfo });
+    return res.status(200).json({
+      status: 200,
+      message: "Successfully retrieved preferences!",
+      data: userExists.preferences,
+    });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .json({ status: 400, error: "Couldn't locate preferences" });
+  }
+};
+
 module.exports = {
   getRecipes,
   getSingleRecipeInfo,
@@ -248,6 +331,9 @@ module.exports = {
   postUserHandler,
   postLikedRecipe,
   postMealPlan,
+  postUserPreference,
   getMealPlanRecipes,
   deleteLikedRecipe,
+  getPreferenceRecipes,
+  getUserPreferences,
 };

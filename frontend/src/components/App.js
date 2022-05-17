@@ -35,16 +35,36 @@ function App() {
       });
   }, []);
 
-  if (isAuthenticated) {
-    fetch("/post-user/", {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-    });
-  }
+  useEffect(() => {
+    const postUser = async () => {
+      fetch("/post-user/", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+        },
+      });
+    };
+
+    const updateHomepageRecipes = async () => {
+      const query = await fetch(`/get-user-preferences/${user.email}`, {
+        method: "GET",
+      });
+      await fetch(`/get-preference-recipes/?cuisine=${query.cuisine}`)
+        .then((res) => res.json())
+        .then((data) => {
+          getAllMeals(data.data.results);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    if (isAuthenticated) {
+      postUser();
+      updateHomepageRecipes();
+    }
+  }, []);
 
   return (
     <div>
