@@ -261,7 +261,7 @@ const getPreferenceRecipes = async (req, res) => {
   try {
     //re-add keto/paleo hardcoded
     const result = await request(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOONACULAR_API_KEY}&number=3&cuisine=${cuisine}`,
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOONACULAR_API_KEY}&number=3&cuisine=${cuisine}&intolerances=${intolerances}&maxCarbs=${maxCarbs}&maxProtein=${maxProtein}`,
       { headers: { Accept: "application/json" } }
     );
     return res.status(200).json({
@@ -290,7 +290,7 @@ const postUserPreference = async (req, res) => {
     if (userExists) {
       await db
         .collection("users")
-        .updateOne({ email: userInfo }, { $push: { preferences: query } });
+        .updateOne({ email: userInfo }, { $set: { preferences: query } });
       return res.status(200).json({
         status: 200,
         message: "Successfully added preferences!",

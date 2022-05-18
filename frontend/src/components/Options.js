@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Options = ({ list, setQuery, query, defaultQuery }) => {
+const Options = ({ list, setQuery, query, defaultQuery, optionName }) => {
   const onChangeHandler = (e) => {
     let newQuery = { ...query };
-    newQuery.cuisine = e.target.value;
+    newQuery[optionName] = e.target.value;
     setQuery(newQuery);
   };
 

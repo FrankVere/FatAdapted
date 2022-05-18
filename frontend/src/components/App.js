@@ -15,25 +15,8 @@ function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   const {
-    actions: { getAllMeals },
+    actions: { getAllMeals, updateMealPlan },
   } = useContext(MealContext);
-
-  useEffect(() => {
-    fetch("/get-recipes/", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        getAllMeals(data.data.results);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   useEffect(() => {
     const postUser = async () => {
@@ -46,12 +29,30 @@ function App() {
         },
       });
     };
+    //get user meal plan from mongodb//
+    const getUserMealPlan = async () => {
+      const userInfo = user.email;
+      const res = fetch("/get-meal-plan/", {
+        method: "POST",
+        body: JSON.stringify({ userInfo }),
+      });
+      const data = res.json();
+      updateMealPlan(data.data);
+    };
 
     const updateHomepageRecipes = async () => {
-      const query = await fetch(`/get-user-preferences/${user.email}`, {
+      const res = await fetch(`/get-user-preferences/${user.email}`, {
         method: "GET",
       });
-      await fetch(`/get-preference-recipes/?cuisine=${query.cuisine}`)
+      const data = await res.json();
+      console.log(data);
+      await fetch(
+        `/get-preference-recipes/?cuisine=${data.data.cuisine}&intolerances=${
+          data.data.intolerances
+        }&maxCarbs=${Number(data.data.maxCarbs)}&maxProtein=${Number(
+          data.data.maxProtein
+        )}`
+      )
         .then((res) => res.json())
         .then((data) => {
           getAllMeals(data.data.results);
@@ -63,8 +64,24 @@ function App() {
     if (isAuthenticated) {
       postUser();
       updateHomepageRecipes();
+      getUserMealPlan();
+    } else {
+      fetch("/get-recipes/", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          getAllMeals(data.data.results);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <div>

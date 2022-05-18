@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Options from "./Options";
 import { MealContext } from "../MealContext";
@@ -13,8 +13,16 @@ const Profile = () => {
 
   const initialQuery = {
     cuisine: "Italian",
+    intolerances: "",
+    maxCarbs: 100,
+    maxProtein: 100,
   };
 
+  const handleStateNumbers = (optionName, e) => {
+    let newQuery = { ...query };
+    newQuery[optionName] = e.target.value;
+    setQuery(newQuery);
+  };
   const [query, setQuery] = useState(initialQuery);
 
   if (isAuthenticated) {
@@ -101,7 +109,13 @@ const Profile = () => {
   ];
 
   const onSelectHandler = async () => {
-    await fetch(`/get-preference-recipes/?cuisine=${query.cuisine}`)
+    await fetch(
+      `/get-preference-recipes/?cuisine=${query.cuisine}&intolerances=${
+        query.intolerances
+      }&maxCarbs=${Number(query.maxCarbs)}&maxProtein=${Number(
+        query.maxProtein
+      )}`
+    )
       .then((res) => res.json())
       .then((data) => {
         getAllMeals(data.data.results);
@@ -134,6 +148,29 @@ const Profile = () => {
             setQuery={setQuery}
             query={query}
             defaultQuery="Select cuisine!"
+            optionName="cuisine"
+          />
+          <label>Intolerances</label>
+          <Options
+            list={intolerances}
+            setQuery={setQuery}
+            query={query}
+            defaultQuery="Select intolerances!"
+            optionName="intolerances"
+          />
+          <label>Max Carbs</label>
+          <input
+            type="number"
+            onChange={(e) => {
+              handleStateNumbers("maxCarbs", e);
+            }}
+          />
+          <label>Max Protein</label>
+          <input
+            type="number"
+            onChange={(e) => {
+              handleStateNumbers("maxProtein", e);
+            }}
           />
         </form>
         <button onClick={onSelectHandler}>Save preferences</button>

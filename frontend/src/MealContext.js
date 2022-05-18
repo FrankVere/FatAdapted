@@ -18,6 +18,7 @@ const initialState = {
   userName: "",
   mealPlan,
   singleRecipeInfo: {},
+  mealPlanRecipeIDs: [],
 };
 
 //Use this array to map over all meals inside the components using meals
@@ -44,6 +45,12 @@ function reducer(state, action) {
         ...state,
       };
     }
+    case "getMealPlanIDs": {
+      return {
+        ...state,
+        mealPlanRecipeIDs: action.data,
+      };
+    }
   }
 }
 
@@ -59,6 +66,9 @@ export const MealContextProvider = ({ children }) => {
   const updateMealPlan = (data) => {
     dispatch({ type: "updateMealPlan", data });
   };
+  const getMealPlanRecipeIDs = (data) => {
+    dispatch({ type: "getMealPlanIDs", data });
+  };
 
   return (
     <MealContext.Provider
@@ -68,6 +78,7 @@ export const MealContextProvider = ({ children }) => {
           getAllMeals,
           getSingleRecipeInfo,
           updateMealPlan,
+          getMealPlanRecipeIDs,
         },
       }}
     >

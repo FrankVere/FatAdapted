@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 const LikedRecipes = () => {
   const { user } = useAuth0();
+
   const userInfo = user.email;
+
+  let navigate = useNavigate();
+
+  const handleNav = (id) => {
+    navigate(`/${id}`);
+  };
 
   const [likedRecipeIds, setLikedRecipeIds] = useState();
 
@@ -50,7 +58,12 @@ const LikedRecipes = () => {
         <h1>My Liked Recipes!</h1>
         {allLikedRecipes ? (
           allLikedRecipes.map((likedRecipe) => {
-            return <img src={likedRecipe.image} />;
+            return (
+              <StyledImg
+                onClick={() => handleNav(likedRecipe.id)}
+                src={likedRecipe.image}
+              />
+            );
           })
         ) : (
           <p>Loading...</p>
@@ -63,4 +76,9 @@ const LikedRecipes = () => {
 const Wrapper = styled.div`
   height: 80vh;
 `;
+const StyledImg = styled.img`
+  width: 150px;
+  height: 150px;
+`;
+
 export default LikedRecipes;
