@@ -73,18 +73,14 @@ const RecipeInfo = () => {
   console.log(singleRecipeInfo);
 
   return (
-    <div>
+    <Container>
       {Object.keys(singleRecipeInfo).length > 0 ? (
         <>
           <RecipeInfoDetail />
-          <LabelWrapper>
-            <StyledNutritionLabel src={imgSrc} />
-          </LabelWrapper>
           <StyledHeader>Ingredients required! </StyledHeader>
-          <img
-            src={ingredientImgSrc}
-            style={{ width: "100vw", height: "300px" }}
-          />
+
+          <img src={ingredientImgSrc} />
+
           <Instructions>
             {Object.keys(singleRecipeInfo).length > 0 && (
               <ol>
@@ -94,30 +90,39 @@ const RecipeInfo = () => {
               </ol>
             )}
           </Instructions>
+          <LabelWrapper>
+            <StyledNutritionLabel src={imgSrc} />
+          </LabelWrapper>
         </>
       ) : (
         <div> Loading... </div>
       )}
-    </div>
+    </Container>
   );
 };
 
 const Instructions = styled.div`
-  display: flex;
   text-align: left;
-  margin-top: -200px;
 `;
+
 const StyledHeader = styled.h2`
   display: flex;
   justify-content: center;
 `;
+
 const StyledNutritionLabel = styled.img`
-  height: 340px;
-  width: 240px;
+  height: 320px;
 `;
 
 const LabelWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 70px;
+`;
+
 export default RecipeInfo;

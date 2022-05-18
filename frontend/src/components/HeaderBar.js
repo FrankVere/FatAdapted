@@ -9,6 +9,7 @@ const HeaderBar = () => {
 
   return (
     <Container>
+      FatAdapted
       <LinksWrapper>
         {" "}
         {user && isAuthenticated ? <LogoutButton /> : <LoginButton />}
@@ -17,7 +18,14 @@ const HeaderBar = () => {
   );
 };
 
-const Container = styled.header``;
+const Container = styled.header`
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+  height: 25px;
+  color: white;
+  text-align: center;
+`;
 const LinksWrapper = styled.div``;
 
 export default HeaderBar;

@@ -33,22 +33,24 @@ const RecipeInfoDetail = () => {
   //the .replace is used to remove the html tags included in the summary (ie, <br><ul> etc)
 
   return (
-    <div>
+    <WholeWrapper>
       {Object.keys(singleRecipeInfo).length > 0 && (
         <>
           {" "}
           <StyledHeader>{singleRecipeInfo.title} </StyledHeader>
-          <StyledSummary>
-            {singleRecipeInfo.summary.replace(/(<([^>]+)>)/gi, "")}
-          </StyledSummary>
           <RecipeImageWrapper>
             <StyledRecipeImage src={singleRecipeInfo.image} />
           </RecipeImageWrapper>
-          <button onClick={handleLiked}>Liked</button>
-          <AddMealPlan />
+          <ButtonContainer>
+            <AddMealPlan />
+            <button onClick={handleLiked}>Liked</button>
+          </ButtonContainer>
+          <StyledSummary>
+            {singleRecipeInfo.summary.replace(/(<([^>]+)>)/gi, "")}
+          </StyledSummary>
         </>
       )}
-    </div>
+    </WholeWrapper>
   );
 };
 
@@ -60,10 +62,20 @@ const StyledSummary = styled.p`
   text-decoration: none;
 `;
 const StyledRecipeImage = styled.img`
-  width: 250px;
+  width: 300px;
 `;
 const RecipeImageWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+  margin-left: 45px;
 `;
+
+const WholeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
 export default RecipeInfoDetail;
