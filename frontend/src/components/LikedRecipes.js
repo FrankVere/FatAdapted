@@ -66,7 +66,9 @@ const LikedRecipes = () => {
             );
           })
         ) : (
-          <p>Loading...</p>
+          <WrapperSpinner>
+            <div className="lds-hourglass" />
+          </WrapperSpinner>
         )}
       </div>
     </Wrapper>
@@ -79,6 +81,14 @@ const Wrapper = styled.div`
 const StyledImg = styled.img`
   width: 150px;
   height: 150px;
+`;
+
+const WrapperSpinner = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
 `;
 
 export default LikedRecipes;

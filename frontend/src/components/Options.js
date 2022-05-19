@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Options = ({ list, setQuery, query, defaultQuery, optionName }) => {
   const onChangeHandler = (e) => {
     let newQuery = { ...query };
-    newQuery[optionName] = e.target.value;
+    newQuery[optionName] = newQuery[optionName] + "," + e.target.value;
     setQuery(newQuery);
   };
 

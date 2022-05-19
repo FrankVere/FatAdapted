@@ -257,11 +257,9 @@ const getPreferenceRecipes = async (req, res) => {
     maxFat,
     maxCaffeine,
   } = req.query;
-  // `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOONACULAR_API_KEY}&diet={diet}&number=2&cuisine=${cuisine}&excludeCuisine=${excludeCuisine}&intolerances=${intolerances}&includeIngredients=${includeIngredients}&excludeIngredients=${excludeIngredients}&type=${type}&maxReadyTime=${maxReadyTime}&maxCarbs=${maxCarbs}&maxProtein=${maxProtein}&maxCalories=${maxCalories}&maxFat=${maxFat}&maxCaffeine=${maxCaffeine}`
   try {
-    //re-add keto/paleo hardcoded
     const result = await request(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOONACULAR_API_KEY}&number=3&cuisine=${cuisine}&intolerances=${intolerances}&maxCarbs=${maxCarbs}&maxProtein=${maxProtein}`,
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOONACULAR_API_KEY}&number=3&cuisine=${cuisine}&intolerances=${intolerances}&diet=${diet}&type=${type}&maxCarbs=${maxCarbs}&maxProtein=${maxProtein}&maxFat=${maxFat}&maxCaffeine=${maxCaffeine}&maxCalories=${maxCalories}&maxReadyTime=${maxReadyTime}`,
       { headers: { Accept: "application/json" } }
     );
     return res.status(200).json({

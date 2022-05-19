@@ -14,11 +14,12 @@ const mealPlan = [
 
 const initialState = {
   allMeals: [],
-  isLoaded: false,
+  isLoaded: true,
   userName: "",
   mealPlan,
   singleRecipeInfo: {},
   mealPlanRecipeIDs: [],
+  userMealPreferences: {},
 };
 
 //Use this array to map over all meals inside the components using meals
@@ -51,6 +52,18 @@ function reducer(state, action) {
         mealPlanRecipeIDs: action.data,
       };
     }
+    case "getUserMealPreferences": {
+      return {
+        ...state,
+        userMealPreferences: action.data,
+      };
+    }
+    case "Loading": {
+      return {
+        ...state,
+        isLoaded: action.data,
+      };
+    }
   }
 }
 
@@ -69,6 +82,12 @@ export const MealContextProvider = ({ children }) => {
   const getMealPlanRecipeIDs = (data) => {
     dispatch({ type: "getMealPlanIDs", data });
   };
+  const getUserMealPreferences = (data) => {
+    dispatch({ type: "getUserMealPreferences", data });
+  };
+  const checkLoading = (data) => {
+    dispatch({ type: "Loading", data });
+  };
 
   return (
     <MealContext.Provider
@@ -79,6 +98,8 @@ export const MealContextProvider = ({ children }) => {
           getSingleRecipeInfo,
           updateMealPlan,
           getMealPlanRecipeIDs,
+          getUserMealPreferences,
+          checkLoading,
         },
       }}
     >

@@ -80,7 +80,14 @@ const RecipeInfo = () => {
           <StyledHeader>Ingredients required! </StyledHeader>
 
           <img src={ingredientImgSrc} />
-
+          <ServingPrepWrapper>
+            <div>Serves: {singleRecipeInfo.servings}</div>
+            <div>Prep time: {singleRecipeInfo.readyInMinutes} minutes</div>
+            <div>
+              Weight Watcher Smart Points:{" "}
+              {singleRecipeInfo.weightWatcherSmartPoints}
+            </div>
+          </ServingPrepWrapper>
           <Instructions>
             {Object.keys(singleRecipeInfo).length > 0 && (
               <ol>
@@ -95,7 +102,7 @@ const RecipeInfo = () => {
           </LabelWrapper>
         </>
       ) : (
-        <div> Loading... </div>
+        <div className="lds-hourglass" />
       )}
     </Container>
   );
@@ -103,10 +110,13 @@ const RecipeInfo = () => {
 
 const Instructions = styled.div`
   text-align: left;
+  // background-color: yellow;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-right: 10px;
 `;
 
 const StyledHeader = styled.h2`
-  display: flex;
   justify-content: center;
 `;
 
@@ -123,6 +133,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 70px;
+`;
+
+const ServingPrepWrapper = styled.div`
+  text-align: center;
 `;
 
 export default RecipeInfo;

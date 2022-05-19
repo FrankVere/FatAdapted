@@ -15,7 +15,7 @@ function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   const {
-    actions: { getAllMeals, updateMealPlan },
+    actions: { getAllMeals, checkLoading, updateMealPlan },
   } = useContext(MealContext);
 
   useEffect(() => {
@@ -49,13 +49,18 @@ function App() {
       await fetch(
         `/get-preference-recipes/?cuisine=${data.data.cuisine}&intolerances=${
           data.data.intolerances
-        }&maxCarbs=${Number(data.data.maxCarbs)}&maxProtein=${Number(
-          data.data.maxProtein
-        )}`
+        }&diet=${data.data.diet}&type=${data.data.type}&maxCarbs=${Number(
+          data.data.maxCarbs
+        )}&maxProtein=${Number(data.data.maxProtein)}&maxFat=${Number(
+          data.data.maxFat
+        )}&maxCaffeine=${Number(data.data.maxCaffeine)}&maxCalories=${Number(
+          data.data.maxCalories
+        )}&maxReadyTime=${Number(data.data.maxReadyTime)}`
       )
         .then((res) => res.json())
         .then((data) => {
           getAllMeals(data.data.results);
+          // checkLoading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -66,6 +71,7 @@ function App() {
       updateHomepageRecipes();
       getUserMealPlan();
     } else {
+      // checkLoading(false);
       fetch("/get-recipes/", {
         method: "GET",
         headers: {
