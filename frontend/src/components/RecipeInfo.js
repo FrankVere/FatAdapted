@@ -88,15 +88,19 @@ const RecipeInfo = () => {
               {singleRecipeInfo.weightWatcherSmartPoints}
             </div>
           </ServingPrepWrapper>
-          <Instructions>
-            {Object.keys(singleRecipeInfo).length > 0 && (
-              <ol>
-                {singleRecipeInfo.analyzedInstructions[0].steps.map((step) => (
-                  <li>{step.step}</li>
-                ))}
-              </ol>
-            )}
-          </Instructions>
+          <InstructionsWrapper>
+            <Instructions>
+              {Object.keys(singleRecipeInfo).length > 0 && (
+                <ol>
+                  {singleRecipeInfo.analyzedInstructions[0].steps.map(
+                    (step) => (
+                      <li>{step.step}</li>
+                    )
+                  )}
+                </ol>
+              )}
+            </Instructions>
+          </InstructionsWrapper>
           <LabelWrapper>
             <StyledNutritionLabel src={imgSrc} />
           </LabelWrapper>
@@ -110,10 +114,9 @@ const RecipeInfo = () => {
 
 const Instructions = styled.div`
   text-align: left;
-  // background-color: yellow;
-  margin-left: 30px;
-  margin-right: 30px;
-  padding-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-right: 5px;
 `;
 
 const StyledHeader = styled.h2`
@@ -139,4 +142,11 @@ const ServingPrepWrapper = styled.div`
   text-align: center;
 `;
 
+const InstructionsWrapper = styled.div`
+  border: 2px solid #f5ce62;
+  margin: 5px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 5px #e85a19;
+  background-color: #fff;
+`;
 export default RecipeInfo;

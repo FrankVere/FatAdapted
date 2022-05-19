@@ -48,7 +48,9 @@ const AddMealPlan = () => {
           <option value={5}>Saturday</option>
           <option value={6}>Sunday</option>
         </select>
-        <button onClick={handleAddMealPlan}>Add to Meal Plan!</button>
+        <button className="bn632-hover bn19" onClick={handleAddMealPlan}>
+          Add to Meal Plan!
+        </button>
       </div>
     </>
   );

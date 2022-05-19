@@ -5,6 +5,49 @@ body {
     font-family: 'Roboto Flex', sans-serif;
     margin: 0;
 }
+//buttons//
+
+.bn632-hover {
+  font-family: "Roboto Flex", sans-serif;
+  width: 100px;
+  height: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 30px;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.bn632-hover:hover {
+  background-position: 100% 0;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.bn632-hover:focus {
+  outline: none;
+}
+
+.bn632-hover.bn19 {
+  background-image: linear-gradient(
+    to right,
+    #f5ce62,
+    #e43603,
+    #fa7199,
+    #e85a19
+  );
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
 
 //loading spinner //
 
@@ -40,6 +83,7 @@ body {
   }
 }
 
+//navbar//
 
 .nav-buttons {
     list-style-type: none;

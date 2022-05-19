@@ -13,18 +13,27 @@ const MealList = () => {
   const handleNav = (id) => {
     navigate(`/${id}`);
   };
-
+  console.log(allMeals);
   return (
     <div>
       {allMeals.map((meal) => {
         return (
-          <StyledImg onClick={() => handleNav(meal.id)} src={meal.image} />
+          <Wrapper>
+            <StyledImg onClick={() => handleNav(meal.id)} src={meal.image} />
+            <p>{meal.title}</p>
+          </Wrapper>
         );
       })}
     </div>
   );
 };
 
-const StyledImg = styled.img``;
+const StyledImg = styled.img`
+  width: 100px;
+`;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 export default MealList;

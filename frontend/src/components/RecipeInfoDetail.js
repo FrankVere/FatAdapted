@@ -43,11 +43,15 @@ const RecipeInfoDetail = () => {
           </RecipeImageWrapper>
           <ButtonContainer>
             <AddMealPlan />
-            <button onClick={handleLiked}>Liked</button>
+            <button className="bn632-hover bn19" onClick={handleLiked}>
+              Liked
+            </button>
           </ButtonContainer>
-          <StyledSummary>
-            {singleRecipeInfo.summary.replace(/(<([^>]+)>)/gi, "")}
-          </StyledSummary>
+          <SummaryWrapper>
+            <StyledSummary>
+              {singleRecipeInfo.summary.replace(/(<([^>]+)>)/gi, "")}
+            </StyledSummary>
+          </SummaryWrapper>
         </>
       )}
     </WholeWrapper>
@@ -76,6 +80,14 @@ const WholeWrapper = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
+`;
+
+const SummaryWrapper = styled.div`
+  border: 2px solid #e85a19;
+  margin: 5px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 5px #f5ce62;
+  background-color: #fff;
 `;
 
 export default RecipeInfoDetail;
