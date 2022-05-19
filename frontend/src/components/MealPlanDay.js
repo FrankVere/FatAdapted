@@ -16,25 +16,23 @@ const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
   console.log(mealPlanRecipes);
 
   return (
-    <div>
-      <CardWrapper>
-        <Day
-          onClick={() => {
-            setDisplaying(!displaying);
-          }}
-        >
-          {dayByIndex[index]}
-        </Day>
+    <CardWrapper>
+      <Day
+        onClick={() => {
+          setDisplaying(!displaying);
+        }}
+      >
+        {dayByIndex[index]}
+      </Day>
 
-        <RecipeList displaying={displaying}>
-          {recipeIDs.map((id) => {
-            return (
-              <RecipeByDay mealPlanRecipes={mealPlanRecipes} recipeIDs={id} />
-            );
-          })}
-        </RecipeList>
-      </CardWrapper>
-    </div>
+      <RecipeList displaying={displaying}>
+        {recipeIDs.map((id) => {
+          return (
+            <RecipeByDay mealPlanRecipes={mealPlanRecipes} recipeIDs={id} />
+          );
+        })}
+      </RecipeList>
+    </CardWrapper>
   );
 };
 
@@ -42,6 +40,7 @@ export default MealPlanDay;
 
 const CardWrapper = styled.div`
   margin-left: 24px;
+  margin-bottom: 1rem;
 `;
 
 const Day = styled.div`

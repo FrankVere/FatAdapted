@@ -50,19 +50,24 @@ const MealPlan = () => {
   console.log(mealPlanRecipeIDs);
 
   return (
-    <div>
+    <StyledWrapper>
       {mealPlanRecipeIDs.data &&
         mealPlanRecipeIDs.data.map((day, index) => {
           return (
-            <MealPlanDay
-              mealPlanRecipes={mealPlanRecipes}
-              recipeIDs={day}
-              index={index}
-            />
+            <MealPlanWrapper>
+              <MealPlanDay
+                mealPlanRecipes={mealPlanRecipes}
+                recipeIDs={day}
+                index={index}
+              />
+            </MealPlanWrapper>
           );
         })}
-    </div>
+    </StyledWrapper>
   );
 };
 
 export default MealPlan;
+
+const StyledWrapper = styled.div``;
+const MealPlanWrapper = styled.div``;

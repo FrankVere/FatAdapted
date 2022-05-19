@@ -16,9 +16,16 @@ const Homepage = () => {
   return (
     <>
       <RecipeRandomizer />
-      <MealList />
+      <Container>
+        <MealList />
+      </Container>
     </>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  // justify-content: center;
+`;
 
 export default Homepage;

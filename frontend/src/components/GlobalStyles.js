@@ -4,6 +4,7 @@ export default createGlobalStyle`
 body {
     font-family: 'Roboto Flex', sans-serif;
     margin: 0;
+    box-sizing: border-box;
 }
 //buttons//
 

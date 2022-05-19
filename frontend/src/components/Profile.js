@@ -179,86 +179,121 @@ const Profile = () => {
 
   return (
     isAuthenticated && (
-      <Wrapper>
-        <ProfilePhoto src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <form>
-          <label>Cuisine</label>
-          <Options
-            list={cuisineOptions}
-            setQuery={setQuery}
-            query={query}
-            defaultQuery="Select cuisine!"
-            optionName="cuisine"
-          />
-          <label>Intolerances</label>
-          <Options
-            list={intolerances}
-            setQuery={setQuery}
-            query={query}
-            defaultQuery="Select intolerances!"
-            optionName="intolerances"
-          />
-          <label>Diet</label>
-          <Options
-            list={diet}
-            setQuery={setQuery}
-            query={query}
-            defaultQuery="Select diet!"
-            optionName="diet"
-          />
-          <label>Type of Meal</label>
-          <Options
-            list={type}
-            setQuery={setQuery}
-            query={query}
-            defaultQuery="Select Type of Meal!"
-            optionName="type"
-          />
-          <label>Max Carbs</label>
-          <input
-            type="number"
-            onChange={(e) => {
-              handleStateNumbers("maxCarbs", e);
-            }}
-          />
-          <label>Max Protein</label>
-          <input
-            type="number"
-            onChange={(e) => {
-              handleStateNumbers("maxProtein", e);
-            }}
-          />
-          <label>Max Calories</label>
-          <input
-            type="number"
-            onChange={(e) => {
-              handleStateNumbers("maxCalories", e);
-            }}
-          />
-          <label>Max Fat</label>
-          <input
-            type="number"
-            onChange={(e) => {
-              handleStateNumbers("maxFat", e);
-            }}
-          />
-          <label>Max Caffeine</label>
-          <input
-            type="number"
-            onChange={(e) => {
-              handleStateNumbers("maxCaffeine", e);
-            }}
-          />
-          <label>Max Ready Time</label>
-          <input
-            type="number"
-            onChange={(e) => {
-              handleStateNumbers("maxReadyTime", e);
-            }}
-          />
-        </form>
-        <button onClick={onSelectHandler}>Save preferences</button>
+      <>
+        <AccountInfo>
+          <ProfilePhoto src={user.picture} alt={user.name} />
+          <h3>{user.name}</h3>
+        </AccountInfo>
+        <PreferenceWrapper>
+          <form>
+            <InputWrapper>
+              <label>Cuisine</label>
+              <Options
+                list={cuisineOptions}
+                setQuery={setQuery}
+                query={query}
+                defaultQuery="Select cuisine!"
+                optionName="cuisine"
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>Intolerances</label>
+              <Options
+                list={intolerances}
+                setQuery={setQuery}
+                query={query}
+                defaultQuery="Select intolerances!"
+                optionName="intolerances"
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>Diet</label>
+              <Options
+                list={diet}
+                setQuery={setQuery}
+                query={query}
+                defaultQuery="Select diet!"
+                optionName="diet"
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>Type of Meal</label>
+              <Options
+                list={type}
+                setQuery={setQuery}
+                query={query}
+                defaultQuery="Select Type of Meal!"
+                optionName="type"
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>Max Carbs</label>
+              <input
+                className="input"
+                type="number"
+                onChange={(e) => {
+                  handleStateNumbers("maxCarbs", e);
+                }}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>Max Protein</label>
+              <input
+                className="input"
+                type="number"
+                onChange={(e) => {
+                  handleStateNumbers("maxProtein", e);
+                }}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>Max Calories</label>
+              <input
+                className="input"
+                type="number"
+                onChange={(e) => {
+                  handleStateNumbers("maxCalories", e);
+                }}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>Max Fat</label>
+              <input
+                className="input"
+                type="number"
+                onChange={(e) => {
+                  handleStateNumbers("maxFat", e);
+                }}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>Max Caffeine</label>
+              <input
+                className="input"
+                type="number"
+                onChange={(e) => {
+                  handleStateNumbers("maxCaffeine", e);
+                }}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>Max Ready Time</label>
+              <input
+                className="input"
+                type="number"
+                onChange={(e) => {
+                  handleStateNumbers("maxReadyTime", e);
+                }}
+              />
+            </InputWrapper>
+          </form>
+        </PreferenceWrapper>
+        <SaveButtonStyled
+          className="bn632-hover bn19"
+          onClick={onSelectHandler}
+        >
+          Save preferences
+        </SaveButtonStyled>
         <h3>Saved Preferences</h3>
         <WrapperPreferences>
           {savedPreferences && loadingRecipes === false ? (
@@ -284,7 +319,7 @@ const Profile = () => {
                 Diet:{" "}
                 {savedPreferences.diet.replace(",", "").replaceAll(",", ", ")}{" "}
               </div>
-              <div>Maximum Carbs:{savedPreferences.maxCarbs}</div>
+              <div>Maximum Carbs: {savedPreferences.maxCarbs}</div>
               <div>Max Protein: {savedPreferences.maxProtein}</div>
               <div>Max Calories: {savedPreferences.maxCalories}</div>
               <div>Max Fat: {savedPreferences.maxFat}</div>
@@ -295,25 +330,58 @@ const Profile = () => {
             loadingRecipes && <div className="lds-hourglass" />
           )}
         </WrapperPreferences>
-        <button onClick={resetHandler}>Reset</button>
-      </Wrapper>
+        <button className="bn632-hover bn19" onClick={resetHandler}>
+          Reset
+        </button>
+      </>
     )
   );
 };
 
-const Wrapper = styled.div`
-  display: block;
-  overflow: auto;
-  height: 91vh;
-  margin-left: 10px;
+const InputWrapper = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 5px;
+  .input {
+    margin-left: 10px;
+    width: 40px;
+  }
+`;
+
+const AccountInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const WrapperPreferences = styled.div`
-  display: flex;
-  flex-direction: column;
+  border: 2px solid #f5ce62;
+  margin-left: 5px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 5px #e85a19;
+  background-color: #fff;
 `;
 
 const ProfilePhoto = styled.img`
   width: 50px;
 `;
+
+const SaveButtonStyled = styled.button`
+  margin-top: 20px;
+  margin-left: 150px;
+`;
+
+const PreferenceWrapper = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 4px;
+  border: 2px solid #e85a19;
+  margin: 5px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 5px #f5ce62;
+  background-color: #fff;
+`;
+
 export default Profile;

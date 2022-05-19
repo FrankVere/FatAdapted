@@ -9,14 +9,19 @@ const Options = ({ list, setQuery, query, defaultQuery, optionName }) => {
   };
 
   return (
-    <div>
+    <Wrapper>
       <select onChange={onChangeHandler}>
         <option>{defaultQuery}</option>
         {list.map((item) => {
           return <option value={item}>{item}</option>;
         })}
       </select>
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  margin-left: 10px;
+`;
+
 export default Options;

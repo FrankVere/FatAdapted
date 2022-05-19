@@ -15,25 +15,31 @@ const MealList = () => {
   };
   console.log(allMeals);
   return (
-    <div>
+    <>
       {allMeals.map((meal) => {
         return (
           <Wrapper>
             <StyledImg onClick={() => handleNav(meal.id)} src={meal.image} />
-            <p>{meal.title}</p>
+            <span>{meal.title}</span>
           </Wrapper>
         );
       })}
-    </div>
+    </>
   );
 };
 
 const StyledImg = styled.img`
-  width: 100px;
+  width: 150px;
 `;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+  // // display: flex;
+  // // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  // padding: 1rem;
+  // // position: relative;
+  // // width: 200px;
 `;
+
 export default MealList;
