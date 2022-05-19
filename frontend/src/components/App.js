@@ -13,11 +13,11 @@ import GlobalStyles from "./GlobalStyles";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
-
   const {
-    actions: { getAllMeals, checkLoading, updateMealPlan },
+    actions: { getAllMeals, updateMealPlan },
   } = useContext(MealContext);
 
+  //this will post user information to mongo//
   useEffect(() => {
     const postUser = async () => {
       fetch("/post-user/", {
@@ -60,7 +60,6 @@ function App() {
         .then((res) => res.json())
         .then((data) => {
           getAllMeals(data.data.results);
-          // checkLoading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -71,7 +70,6 @@ function App() {
       updateHomepageRecipes();
       getUserMealPlan();
     } else {
-      // checkLoading(false);
       fetch("/get-recipes/", {
         method: "GET",
         headers: {

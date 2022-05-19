@@ -13,9 +13,7 @@ const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
     5: "Saturday",
     6: "Sunday",
   };
-  // const filterRecipes = mealPlanRecipes.filter((recipe) => {
-  //   return recipeIDs.indexOf();
-  // });
+  console.log(mealPlanRecipes);
 
   return (
     <div>
@@ -27,6 +25,7 @@ const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
         >
           {dayByIndex[index]}
         </Day>
+
         <RecipeList displaying={displaying}>
           {recipeIDs.map((id) => {
             return (
@@ -41,8 +40,16 @@ const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
 
 export default MealPlanDay;
 
-const CardWrapper = styled.div``;
-const Day = styled.div``;
+const CardWrapper = styled.div`
+  margin-left: 24px;
+`;
+
+const Day = styled.div`
+  height: 150px;
+  width: 85vw;
+  border: solid;
+`;
+
 const RecipeList = styled.div`
   display: ${(p) => (p.displaying ? "block" : "none")};
 `;

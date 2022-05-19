@@ -8,20 +8,49 @@ const RecipeByDay = ({ recipeIDs, mealPlanRecipes }) => {
   const handleNav = () => {
     navigate(`/${recipeIDs}`);
   };
+  console.log(mealPlanRecipes);
   return (
-    <div>
+    <ContainerCard>
       {mealArray &&
         mealArray.map(
           (meal) =>
             meal.id === recipeIDs && (
-              <img onClick={handleNav} src={meal.image} />
+              <Wrapper>
+                <StyledRecipeImage onClick={handleNav} src={meal.image} />
+                <StyledTitle>{meal.title}</StyledTitle>
+                <StyledNutritionalInfo>
+                  <div>Calories: {meal.nutrition.nutrients[0].amount}</div>
+                  <div>Fat: {meal.nutrition.nutrients[1].amount}</div>
+                  <div>Carbohydrates: {meal.nutrition.nutrients[3].amount}</div>
+                  <div>Sugar: {meal.nutrition.nutrients[5].amount}</div>
+                  <div>Protein: {meal.nutrition.nutrients[8].amount}</div>
+                </StyledNutritionalInfo>
+              </Wrapper>
             )
         )}
-      <DisplayedRecipes>{recipeIDs}</DisplayedRecipes>
-    </div>
+    </ContainerCard>
   );
 };
 
 export default RecipeByDay;
 
-const DisplayedRecipes = styled.div``;
+const StyledTitle = styled.h2``;
+
+const ContainerCard = styled.div`
+  height: 300px;
+  width: 85vw;
+  border: solid;
+  background-color: #ffbb99;
+`;
+
+const StyledRecipeImage = styled.img`
+  height: 120px;
+  width: 120px;
+  margin-left: 110px;
+`;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;
+const StyledNutritionalInfo = styled.div``;

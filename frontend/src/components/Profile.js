@@ -9,7 +9,9 @@ const Profile = () => {
   const [savedPreferences, setSavedPreferences] = useState();
   const userInfo = user.email;
   const {
-    actions: { getAllMeals, getUserMealPreferences, checkLoading },
+    actions: { getAllMeals, getUserMealPreferences },
+    loadingRecipes,
+    setLoadingRecipes,
   } = useContext(MealContext);
 
   const initialQuery = {
@@ -129,6 +131,7 @@ const Profile = () => {
   ];
   //here we make the complex search of preferences to the api and this replaces what's rendered on the homepage to fit the users preferences//
   const onSelectHandler = async () => {
+    setLoadingRecipes(true);
     await fetch(
       `/get-preference-recipes/?cuisine=${query.cuisine}&intolerances=${
         query.intolerances
@@ -143,7 +146,6 @@ const Profile = () => {
       .then((res) => res.json())
       .then((data) => {
         getAllMeals(data.data.results);
-        // checkLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -156,7 +158,9 @@ const Profile = () => {
         "Content-type": "application/json",
       },
     });
-    getSavedPreferences();
+
+    await getSavedPreferences();
+    setLoadingRecipes(false);
   };
 
   const resetHandler = async () => {
@@ -168,6 +172,7 @@ const Profile = () => {
         "Content-type": "application/json",
       },
     });
+    setQuery(initialQuery);
     getSavedPreferences();
   };
   console.log("hi", query);
@@ -256,13 +261,29 @@ const Profile = () => {
         <button onClick={onSelectHandler}>Save preferences</button>
         <h3>Saved Preferences</h3>
         <WrapperPreferences>
-          {savedPreferences && (
+          {savedPreferences && loadingRecipes === false ? (
             <>
               {" "}
-              <div>Cuisine: {savedPreferences.cuisine}</div>
-              <div>Intolerances: {savedPreferences.intolerances}</div>
-              <div>Type: {savedPreferences.type}</div>
-              <div>Diet: {savedPreferences.diet} </div>
+              <div>
+                Cuisine:{" "}
+                {savedPreferences.cuisine
+                  .replace(",", "")
+                  .replaceAll(",", ", ")}
+              </div>
+              <div>
+                Intolerances:{" "}
+                {savedPreferences.intolerances
+                  .replace(",", "")
+                  .replaceAll(",", ", ")}
+              </div>
+              <div>
+                Type:{" "}
+                {savedPreferences.type.replace(",", "").replaceAll(",", ", ")}
+              </div>
+              <div>
+                Diet:{" "}
+                {savedPreferences.diet.replace(",", "").replaceAll(",", ", ")}{" "}
+              </div>
               <div>Maximum Carbs:{savedPreferences.maxCarbs}</div>
               <div>Max Protein: {savedPreferences.maxProtein}</div>
               <div>Max Calories: {savedPreferences.maxCalories}</div>
@@ -270,6 +291,8 @@ const Profile = () => {
               <div>Max Cafferine: {savedPreferences.maxCaffeine}</div>
               <div>Max Ready Time: {savedPreferences.maxReadyTime}</div>
             </>
+          ) : (
+            loadingRecipes && <div className="lds-hourglass" />
           )}
         </WrapperPreferences>
         <button onClick={resetHandler}>Reset</button>

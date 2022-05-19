@@ -69,6 +69,7 @@ function reducer(state, action) {
 
 export const MealContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [loadingRecipes, setLoadingRecipes] = useState(false);
 
   const getAllMeals = (data) => {
     dispatch({ type: "getAllMeals", data });
@@ -101,6 +102,8 @@ export const MealContextProvider = ({ children }) => {
           getUserMealPreferences,
           checkLoading,
         },
+        loadingRecipes,
+        setLoadingRecipes,
       }}
     >
       {children}
