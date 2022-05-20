@@ -1,14 +1,23 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import styled from "styled-components";
 
 const LogoutButton = () => {
   const { logout } = useAuth0();
 
   return (
-    <button onClick={() => logout({ returnTo: window.location.origin })}>
+    <ButtonStyled
+      className="bn632-hover bn19"
+      onClick={() => logout({ returnTo: window.location.origin })}
+    >
       Log Out
-    </button>
+    </ButtonStyled>
   );
 };
+
+const ButtonStyled = styled.button`
+  margin-top: 7px;
+  margin-right: 5px;
+`;
 
 export default LogoutButton;

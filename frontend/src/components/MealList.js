@@ -33,13 +33,12 @@ const StyledImg = styled.img`
 `;
 
 const Wrapper = styled.div`
-  // // display: flex;
-  // // flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   // align-items: center;
   // justify-content: center;
   // padding: 1rem;
-  // // position: relative;
-  // // width: 200px;
+  // position: relative;
 `;
 
 export default MealList;

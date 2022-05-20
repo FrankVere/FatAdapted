@@ -13,7 +13,7 @@ const RecipeRandomizer = () => {
 
   const getMealInfo = () => {
     fetch(
-      `https://api.spoonacular.com/mealplanner/generate?apiKey=${SPOONACULAR_API_KEY}&timeFrame=day&targetCalories=${calories}&diet=Paleo&Ketogenic`
+      `https://api.spoonacular.com/mealplanner/generate?apiKey=${SPOONACULAR_API_KEY}&timeFrame=day&targetCalories=${calories}`
     )
       .then((res) => res.json())
       .then((data) => {

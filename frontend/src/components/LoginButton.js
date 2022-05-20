@@ -1,18 +1,24 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import styled from "styled-components";
 
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
 
   return (
-    <button
+    <ButtonStyled
+      className="bn632-hover bn19"
       onClick={() => {
         loginWithRedirect();
       }}
     >
       Log In
-    </button>
+    </ButtonStyled>
   );
 };
 
+const ButtonStyled = styled.button`
+  margin-top: 7px;
+  margin-right: 5px;
+`;
 export default LoginButton;

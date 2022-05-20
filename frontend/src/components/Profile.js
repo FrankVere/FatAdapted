@@ -146,6 +146,7 @@ const Profile = () => {
       .then((res) => res.json())
       .then((data) => {
         getAllMeals(data.data.results);
+        setLoadingRecipes(false);
       })
       .catch((error) => {
         console.log(error);
@@ -295,9 +296,9 @@ const Profile = () => {
           Save preferences
         </SaveButtonStyled>
         <h3>Saved Preferences</h3>
-        <WrapperPreferences>
-          {savedPreferences && loadingRecipes === false ? (
-            <>
+        {savedPreferences && loadingRecipes === false ? (
+          <>
+            <WrapperPreferences>
               {" "}
               <div>
                 Cuisine:{" "}
@@ -325,11 +326,11 @@ const Profile = () => {
               <div>Max Fat: {savedPreferences.maxFat}</div>
               <div>Max Cafferine: {savedPreferences.maxCaffeine}</div>
               <div>Max Ready Time: {savedPreferences.maxReadyTime}</div>
-            </>
-          ) : (
-            loadingRecipes && <div className="lds-hourglass" />
-          )}
-        </WrapperPreferences>
+            </WrapperPreferences>
+          </>
+        ) : (
+          loadingRecipes && <div className="lds-hourglass" />
+        )}
         <button className="bn632-hover bn19" onClick={resetHandler}>
           Reset
         </button>
@@ -357,6 +358,7 @@ const AccountInfo = styled.div`
 
 const WrapperPreferences = styled.div`
   border: 2px solid #f5ce62;
+  align-text: left;
   margin-left: 5px;
   border-radius: 20px;
   box-shadow: 0 0 10px 5px #e85a19;

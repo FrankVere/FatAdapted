@@ -7,15 +7,20 @@ import RecipeRandomizer from "./RecipeRandomizer";
 const Homepage = () => {
   const {
     actions: { getSingleRecipeInfo },
+    loadingRecipes,
   } = useContext(MealContext);
 
   useEffect(() => {
     getSingleRecipeInfo({});
   }, []);
 
+  console.log(loadingRecipes);
+
   return (
     <>
-      <RecipeRandomizer />
+      {" "}
+      {loadingRecipes && "hi"}
+      {/* <RecipeRandomizer /> */}
       <Container>
         <MealList />
       </Container>
