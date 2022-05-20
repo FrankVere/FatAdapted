@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import RecipeByDay from "./RecipeByDay";
+import calendarPhoto from "../images/calendarPhoto.jpg";
 
 const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
   const [displaying, setDisplaying] = useState(false);
@@ -41,12 +42,14 @@ export default MealPlanDay;
 const CardWrapper = styled.div`
   margin-left: 24px;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 `;
 
 const Day = styled.div`
   height: 150px;
   width: 85vw;
   border: solid;
+  background-image: url(${calendarPhoto});
 `;
 
 const RecipeList = styled.div`

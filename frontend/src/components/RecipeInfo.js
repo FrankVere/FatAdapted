@@ -77,16 +77,16 @@ const RecipeInfo = () => {
       {Object.keys(singleRecipeInfo).length > 0 ? (
         <>
           <RecipeInfoDetail />
-          <StyledHeader>Ingredients required! </StyledHeader>
+          <StyledHeader>Ingredients required </StyledHeader>
 
           <img src={ingredientImgSrc} />
           <ServingPrepWrapper>
-            <div>Serves: {singleRecipeInfo.servings}</div>
-            <div>Prep time: {singleRecipeInfo.readyInMinutes} minutes</div>
-            <div>
+            <p>Serves: {singleRecipeInfo.servings}</p>
+            <p>Prep time: {singleRecipeInfo.readyInMinutes} minutes</p>
+            <p>
               Weight Watcher Smart Points:{" "}
               {singleRecipeInfo.weightWatcherSmartPoints}
-            </div>
+            </p>
           </ServingPrepWrapper>
           <InstructionsWrapper>
             <Instructions>
@@ -106,7 +106,9 @@ const RecipeInfo = () => {
           </LabelWrapper>
         </>
       ) : (
-        <div className="lds-hourglass" />
+        <SpinnerWrapper>
+          <div className="lds-hourglass" />
+        </SpinnerWrapper>
       )}
     </Container>
   );
@@ -120,11 +122,13 @@ const Instructions = styled.div`
 `;
 
 const StyledHeader = styled.h2`
-  justify-content: center;
+  text-align: center;
+  font-size: 20px;
 `;
 
 const StyledNutritionLabel = styled.img`
   height: 320px;
+  margin-top: 40px;
 `;
 
 const LabelWrapper = styled.div`
@@ -140,6 +144,7 @@ const Container = styled.div`
 
 const ServingPrepWrapper = styled.div`
   text-align: center;
+  margin-bottom: 30px;
 `;
 
 const InstructionsWrapper = styled.div`
@@ -148,5 +153,13 @@ const InstructionsWrapper = styled.div`
   border-radius: 20px;
   box-shadow: 0 0 10px 5px #e85a19;
   background-color: #fff;
+`;
+
+const SpinnerWrapper = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
 `;
 export default RecipeInfo;

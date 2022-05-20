@@ -11,10 +11,7 @@ const HeaderBar = () => {
   return (
     <Container>
       <LogoStyled src={logo} />
-      <LinksWrapper>
-        {" "}
-        {user && isAuthenticated ? <LogoutButton /> : <LoginButton />}
-      </LinksWrapper>
+      <div>{user && isAuthenticated ? <LogoutButton /> : <LoginButton />}</div>
     </Container>
   );
 };
@@ -27,8 +24,9 @@ const Container = styled.header`
   color: white;
   text-align: center;
 `;
-const LinksWrapper = styled.div``;
 
-const LogoStyled = styled.img``;
+const LogoStyled = styled.img`
+  border-radius: 6px;
+`;
 
 export default HeaderBar;

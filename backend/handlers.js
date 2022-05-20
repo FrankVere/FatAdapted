@@ -245,10 +245,7 @@ const getPreferenceRecipes = async (req, res) => {
   const {
     cuisine,
     diet,
-    excludeCuisine,
     intolerances,
-    includeIngredients,
-    excludeIngredients,
     type,
     maxReadyTime,
     maxCarbs,

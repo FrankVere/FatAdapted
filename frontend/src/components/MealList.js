@@ -19,8 +19,10 @@ const MealList = () => {
       {allMeals.map((meal) => {
         return (
           <Wrapper>
-            <StyledImg onClick={() => handleNav(meal.id)} src={meal.image} />
-            <span>{meal.title}</span>
+            <div style={{ width: "150px", textAlign: "center" }}>
+              <StyledImg onClick={() => handleNav(meal.id)} src={meal.image} />
+              <span className="homepageText">{meal.title}</span>
+            </div>
           </Wrapper>
         );
       })}
@@ -30,15 +32,12 @@ const MealList = () => {
 
 const StyledImg = styled.img`
   width: 150px;
+  border-radius: 10%;
 `;
 
 const Wrapper = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
-  // padding: 1rem;
-  // position: relative;
+  padding: 22px;
+  position: relative;
 `;
 
 export default MealList;

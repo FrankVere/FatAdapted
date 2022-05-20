@@ -188,7 +188,9 @@ const Profile = () => {
         <PreferenceWrapper>
           <form>
             <InputWrapper>
-              <label>Cuisine</label>
+              <label>
+                <b>Cuisine:</b>
+              </label>
               <Options
                 list={cuisineOptions}
                 setQuery={setQuery}
@@ -198,7 +200,9 @@ const Profile = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <label>Intolerances</label>
+              <label>
+                <b>Intolerances:</b>
+              </label>
               <Options
                 list={intolerances}
                 setQuery={setQuery}
@@ -208,7 +212,9 @@ const Profile = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <label>Diet</label>
+              <label>
+                <b>Diet:</b>
+              </label>
               <Options
                 list={diet}
                 setQuery={setQuery}
@@ -218,7 +224,9 @@ const Profile = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <label>Type of Meal</label>
+              <label>
+                <b>Type of Meal:</b>
+              </label>
               <Options
                 list={type}
                 setQuery={setQuery}
@@ -228,7 +236,9 @@ const Profile = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <label>Max Carbs</label>
+              <label>
+                <b>Max Carbs:</b>
+              </label>
               <input
                 className="input"
                 type="number"
@@ -238,7 +248,9 @@ const Profile = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <label>Max Protein</label>
+              <label>
+                <b>Max Protein:</b>
+              </label>
               <input
                 className="input"
                 type="number"
@@ -248,7 +260,9 @@ const Profile = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <label>Max Calories</label>
+              <label>
+                <b>Max Calories:</b>
+              </label>
               <input
                 className="input"
                 type="number"
@@ -258,7 +272,9 @@ const Profile = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <label>Max Fat</label>
+              <label>
+                <b>Max Fat:</b>
+              </label>
               <input
                 className="input"
                 type="number"
@@ -268,7 +284,9 @@ const Profile = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <label>Max Caffeine</label>
+              <label>
+                <b>Max Caffeine:</b>
+              </label>
               <input
                 className="input"
                 type="number"
@@ -278,7 +296,9 @@ const Profile = () => {
               />
             </InputWrapper>
             <InputWrapper>
-              <label>Max Ready Time</label>
+              <label>
+                <b>Max Ready Time:</b>
+              </label>
               <input
                 className="input"
                 type="number"
@@ -289,51 +309,72 @@ const Profile = () => {
             </InputWrapper>
           </form>
         </PreferenceWrapper>
-        <SaveButtonStyled
-          className="bn632-hover bn19"
-          onClick={onSelectHandler}
-        >
-          Save preferences
-        </SaveButtonStyled>
-        <h3>Saved Preferences</h3>
+        <ButtonWrapper>
+          <button className="bn632-hover bn19" onClick={onSelectHandler}>
+            Save preferences
+          </button>
+        </ButtonWrapper>
+        <h3 style={{ textAlign: "center" }}>Saved Preferences</h3>
         {savedPreferences && loadingRecipes === false ? (
           <>
             <WrapperPreferences>
               {" "}
-              <div>
-                Cuisine:{" "}
+              <p>
+                <b>Cuisine: </b>
                 {savedPreferences.cuisine
                   .replace(",", "")
                   .replaceAll(",", ", ")}
-              </div>
-              <div>
-                Intolerances:{" "}
+              </p>
+              <p>
+                <b>Intolerances: </b>
                 {savedPreferences.intolerances
                   .replace(",", "")
                   .replaceAll(",", ", ")}
-              </div>
-              <div>
-                Type:{" "}
+              </p>
+              <p>
+                <b>Type: </b>
                 {savedPreferences.type.replace(",", "").replaceAll(",", ", ")}
-              </div>
-              <div>
-                Diet:{" "}
-                {savedPreferences.diet.replace(",", "").replaceAll(",", ", ")}{" "}
-              </div>
-              <div>Maximum Carbs: {savedPreferences.maxCarbs}</div>
-              <div>Max Protein: {savedPreferences.maxProtein}</div>
-              <div>Max Calories: {savedPreferences.maxCalories}</div>
-              <div>Max Fat: {savedPreferences.maxFat}</div>
-              <div>Max Cafferine: {savedPreferences.maxCaffeine}</div>
-              <div>Max Ready Time: {savedPreferences.maxReadyTime}</div>
+              </p>
+              <p>
+                <b>Diet: </b>
+                {savedPreferences.diet
+                  .replace(",", "")
+                  .replaceAll(",", ", ")}{" "}
+              </p>
+              <p>
+                <b>Maximum Carbs:</b> {savedPreferences.maxCarbs}
+              </p>
+              <p>
+                <b>Max Protein:</b> {savedPreferences.maxProtein}
+              </p>
+              <p>
+                <b>Max Calories:</b> {savedPreferences.maxCalories}
+              </p>
+              <p>
+                <b>Max Fat:</b> {savedPreferences.maxFat}
+              </p>
+              <p>
+                <b>Max Cafferine:</b> {savedPreferences.maxCaffeine}
+              </p>
+              <p>
+                <b>Max Ready Time: </b>
+                {savedPreferences.maxReadyTime}
+              </p>
             </WrapperPreferences>
           </>
         ) : (
-          loadingRecipes && <div className="lds-hourglass" />
+          loadingRecipes && (
+            <LoadingSpinnerWrap>
+              {" "}
+              <div className="lds-hourglass" />{" "}
+            </LoadingSpinnerWrap>
+          )
         )}
-        <button className="bn632-hover bn19" onClick={resetHandler}>
-          Reset
-        </button>
+        <ButtonWrapper>
+          <button className="bn632-hover bn19" onClick={resetHandler}>
+            Reset
+          </button>
+        </ButtonWrapper>
       </>
     )
   );
@@ -358,7 +399,8 @@ const AccountInfo = styled.div`
 
 const WrapperPreferences = styled.div`
   border: 2px solid #f5ce62;
-  align-text: left;
+  padding-inline: 5px;
+  text-align: left;
   margin-left: 5px;
   border-radius: 20px;
   box-shadow: 0 0 10px 5px #e85a19;
@@ -366,12 +408,8 @@ const WrapperPreferences = styled.div`
 `;
 
 const ProfilePhoto = styled.img`
+  margin-top: 10px;
   width: 50px;
-`;
-
-const SaveButtonStyled = styled.button`
-  margin-top: 20px;
-  margin-left: 150px;
 `;
 
 const PreferenceWrapper = styled.div`
@@ -386,4 +424,15 @@ const PreferenceWrapper = styled.div`
   background-color: #fff;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const LoadingSpinnerWrap = styled.div`
+  position: absolute;
+  top: 80%;
+  left: 39%;
+`;
 export default Profile;

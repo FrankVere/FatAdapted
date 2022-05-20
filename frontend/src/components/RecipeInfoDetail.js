@@ -44,7 +44,7 @@ const RecipeInfoDetail = () => {
           <ButtonContainer>
             <AddMealPlan />
             <button className="bn632-hover bn19" onClick={handleLiked}>
-              Liked
+              Like
             </button>
           </ButtonContainer>
           <SummaryWrapper>
@@ -60,6 +60,7 @@ const RecipeInfoDetail = () => {
 
 const StyledHeader = styled.h2`
   text-align: center;
+  font-size: 30px;
 `;
 const StyledSummary = styled.p`
   text-align: center;
@@ -67,6 +68,7 @@ const StyledSummary = styled.p`
 `;
 const StyledRecipeImage = styled.img`
   width: 300px;
+  margin-bottom: 15px;
 `;
 const RecipeImageWrapper = styled.div`
   margin-left: 45px;
@@ -84,7 +86,7 @@ const ButtonContainer = styled.div`
 
 const SummaryWrapper = styled.div`
   border: 2px solid #e85a19;
-  margin: 5px;
+  margin-top: 25px;
   border-radius: 20px;
   box-shadow: 0 0 10px 5px #f5ce62;
   background-color: #fff;

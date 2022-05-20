@@ -8,6 +8,11 @@ body {
 }
 //buttons//
 
+.homepageText {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
 .bn632-hover {
   font-family: "Roboto Flex", sans-serif;
   width: 100px;
@@ -16,7 +21,7 @@ body {
   font-weight: 600;
   color: #fff;
   cursor: pointer;
-  margin: 20px;
+  margin: 6px;
   text-align:center;
   border: none;
   background-size: 300% 100%;

@@ -45,7 +45,7 @@ function App() {
         method: "GET",
       });
       const data = await res.json();
-      console.log(data);
+
       await fetch(
         `/get-preference-recipes/?cuisine=${data.data.cuisine}&intolerances=${
           data.data.intolerances
@@ -65,6 +65,7 @@ function App() {
           console.log(error);
         });
     };
+
     if (isAuthenticated) {
       postUser();
       updateHomepageRecipes();
@@ -88,7 +89,7 @@ function App() {
   }, [isAuthenticated]);
 
   return (
-    <div>
+    <div style={{ paddingBottom: "100px" }}>
       <BrowserRouter>
         <GlobalStyles />
         <HeaderBar />

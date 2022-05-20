@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
+import { MealContext } from "../MealContext";
 
 const LikedRecipes = () => {
   const { user } = useAuth0();
+  const {
+    actions: { getSingleRecipeInfo },
+  } = useContext(MealContext);
+
+  //this useEffect allows me to reset the singleRecipeInfo state to empty so I can trigger a loading spinner when going to recipeInfoDetail//
+
+  useEffect(() => {
+    getSingleRecipeInfo({});
+  }, []);
 
   const userInfo = user.email;
 
@@ -29,7 +39,6 @@ const LikedRecipes = () => {
     const recipeIDs = await getRecipeID.json();
 
     setLikedRecipeIds(recipeIDs.data.toString());
-    console.log(likedRecipeIds);
 
     if (likedRecipeIds) {
       const getRecipes = await fetch(
@@ -60,6 +69,7 @@ const LikedRecipes = () => {
           allLikedRecipes.map((likedRecipe) => {
             return (
               <StyledImg
+                key={likedRecipe.id}
                 onClick={() => handleNav(likedRecipe.id)}
                 src={likedRecipe.image}
               />
@@ -75,9 +85,7 @@ const LikedRecipes = () => {
   );
 };
 
-const Wrapper = styled.div`
-  height: 80vh;
-`;
+const Wrapper = styled.div``;
 const StyledImg = styled.img`
   width: 150px;
   height: 150px;
