@@ -10,7 +10,6 @@ body {
 
 .homepageText {
   font-family: 'Roboto', sans-serif;
-  text-align: center;
 }
 
 .bn632-hover {
@@ -26,7 +25,6 @@ body {
   border: none;
   background-size: 300% 100%;
   border-radius: 30px;
-  moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
@@ -34,7 +32,6 @@ body {
 
 .bn632-hover:hover {
   background-position: 100% 0;
-  moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
