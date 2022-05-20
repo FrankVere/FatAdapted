@@ -19,10 +19,10 @@ const MealList = () => {
       {allMeals.map((meal) => {
         return (
           <Wrapper>
-            <div style={{ width: "150px", textAlign: "center" }}>
-              <StyledImg onClick={() => handleNav(meal.id)} src={meal.image} />
-              <span className="homepageText">{meal.title}</span>
-            </div>
+            {/* <div style={{ width: "150px", textAlign: "center" }}> */}
+            <StyledImg onClick={() => handleNav(meal.id)} src={meal.image} />
+            <span className="homepageText">{meal.title}</span>
+            {/* </div> */}
           </Wrapper>
         );
       })}
@@ -38,6 +38,8 @@ const StyledImg = styled.img`
 const Wrapper = styled.div`
   padding: 22px;
   position: relative;
+  width: 150px;
+  text-align: center;
 `;
 
 export default MealList;

@@ -89,7 +89,7 @@ function App() {
   }, [isAuthenticated]);
 
   return (
-    <div style={{ paddingBottom: "100px" }}>
+    <div style={{ paddingBottom: "120px" }}>
       <BrowserRouter>
         <GlobalStyles />
         <HeaderBar />

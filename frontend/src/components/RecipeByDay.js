@@ -8,14 +8,14 @@ const RecipeByDay = ({ recipeIDs, mealPlanRecipes }) => {
   const handleNav = () => {
     navigate(`/${recipeIDs}`);
   };
-  console.log(mealPlanRecipes);
+
   return (
     <ContainerCard>
       {mealArray &&
         mealArray.map(
           (meal) =>
             meal.id === recipeIDs && (
-              <Wrapper>
+              <Wrapper key={meal.id}>
                 <StyledRecipeImage onClick={handleNav} src={meal.image} />
                 <StyledTitle>{meal.title}</StyledTitle>
                 <StyledNutritionalInfo>

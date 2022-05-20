@@ -62,17 +62,22 @@ const LikedRecipes = () => {
   console.log(allLikedRecipes);
 
   return (
-    <Wrapper>
-      <div>
-        <h1>My Liked Recipes!</h1>
+    <>
+      <h2 style={{ textAlign: "center" }}>My Liked Recipes!</h2>
+      <Wrapper>
         {allLikedRecipes ? (
           allLikedRecipes.map((likedRecipe) => {
             return (
-              <StyledImg
-                key={likedRecipe.id}
-                onClick={() => handleNav(likedRecipe.id)}
-                src={likedRecipe.image}
-              />
+              <WrapperLiked>
+                <StyledImg
+                  key={likedRecipe.id}
+                  onClick={() => handleNav(likedRecipe.id)}
+                  src={likedRecipe.image}
+                />
+                <RecipeName className="homepageText">
+                  {likedRecipe.title}
+                </RecipeName>
+              </WrapperLiked>
             );
           })
         ) : (
@@ -80,15 +85,20 @@ const LikedRecipes = () => {
             <div className="lds-hourglass" />
           </WrapperSpinner>
         )}
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </>
   );
 };
 
-const Wrapper = styled.div``;
+const WrapperLiked = styled.div`
+  padding: 22px;
+  position: relative;
+  width: 150px;
+  text-align: center;
+`;
 const StyledImg = styled.img`
   width: 150px;
-  height: 150px;
+  border-radius: 10%;
 `;
 
 const WrapperSpinner = styled.div`
@@ -98,5 +108,12 @@ const WrapperSpinner = styled.div`
   transform: translateY(-50%);
   transform: translateX(-50%);
 `;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const RecipeName = styled.span``;
 
 export default LikedRecipes;
