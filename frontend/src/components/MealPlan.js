@@ -6,7 +6,8 @@ import MealPlanDay from "./MealPlanDay";
 import { MealContext } from "../MealContext";
 
 const MealPlan = () => {
-  const { user, isLoading } = useAuth0();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { user } = useAuth0();
   const userInfo = user.email;
   const [mealPlanRecipes, setMealPlanRecipes] = useState();
 
@@ -26,8 +27,9 @@ const MealPlan = () => {
     });
     const recipeIDs = await getMealPlanID.json();
     getMealPlanRecipeIDs(recipeIDs);
+    console.log(recipeIDs);
     const flatRecipeIds = Array.prototype.concat.apply([], recipeIDs.data);
-
+    console.log(recipeIDs);
     const getRecipes = await fetch(
       `https://api.spoonacular.com/recipes/informationBulk?includeNutrition=true&ids=${flatRecipeIds.toString()}&apiKey=${
         process.env.REACT_APP_SPOONACULAR_API_KEY
@@ -41,30 +43,31 @@ const MealPlan = () => {
     );
     const mealPlanRecipes = await getRecipes.json();
     setMealPlanRecipes(mealPlanRecipes);
+    setIsLoaded(true);
   };
 
   useEffect(() => {
     fetchRecipes();
   }, []);
 
-  console.log(mealPlanRecipeIDs);
-
-  return (
-    <StyledWrapper>
-      {mealPlanRecipeIDs.data &&
-        mealPlanRecipeIDs.data.map((day, index) => {
-          return (
-            <MealPlanWrapper>
-              <MealPlanDay
-                mealPlanRecipes={mealPlanRecipes}
-                recipeIDs={day}
-                index={index}
-              />
-            </MealPlanWrapper>
-          );
-        })}
-    </StyledWrapper>
-  );
+  if (isLoaded) {
+    return (
+      <StyledWrapper>
+        {mealPlanRecipeIDs.data &&
+          mealPlanRecipeIDs.data.map((day, index) => {
+            return (
+              <MealPlanWrapper>
+                <MealPlanDay
+                  mealPlanRecipes={mealPlanRecipes}
+                  recipeIDs={day}
+                  index={index}
+                />
+              </MealPlanWrapper>
+            );
+          })}
+      </StyledWrapper>
+    );
+  }
 };
 
 export default MealPlan;

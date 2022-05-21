@@ -59,8 +59,6 @@ const LikedRecipes = () => {
     fetchRecipes();
   }, [likedRecipeIds]);
 
-  console.log(allLikedRecipes);
-
   return (
     <>
       <h2 style={{ textAlign: "center" }}>My Liked Recipes!</h2>
@@ -74,7 +72,7 @@ const LikedRecipes = () => {
                   onClick={() => handleNav(likedRecipe.id)}
                   src={likedRecipe.image}
                 />
-                <RecipeName className="homepageText">
+                <RecipeName key={likedRecipe.title} className="homepageText">
                   {likedRecipe.title}
                 </RecipeName>
               </WrapperLiked>

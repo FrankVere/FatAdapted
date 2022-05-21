@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { MealContext } from "../MealContext";
 import MealList from "./MealList";
 import cookingFam from "../images/cookingFam.jpg";
+import RecipeRandomizer from "./RecipeRandomizer";
 
 const Homepage = () => {
   const {
@@ -13,8 +14,6 @@ const Homepage = () => {
   useEffect(() => {
     getSingleRecipeInfo({});
   }, []);
-
-  console.log(loadingRecipes);
 
   return (
     <>
@@ -30,6 +29,7 @@ const Homepage = () => {
         <div>
           <img src={cookingFam} style={{ width: "390px" }} />
           <Container>
+            <RecipeRandomizer />
             <MealList />
           </Container>
         </div>

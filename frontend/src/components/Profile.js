@@ -5,9 +5,17 @@ import styled from "styled-components";
 import { MealContext } from "../MealContext";
 
 const Profile = () => {
-  const { isAuthenticated, user, isLoading } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const [savedPreferences, setSavedPreferences] = useState();
+  const [loadingPicture, setLoadingPicture] = useState(false);
+  const [image, setImage] = useState();
+  const [userPicture, setUserPicture] = useState({
+    userInfo: user.email,
+    profilePicture: "",
+  });
+
   const userInfo = user.email;
+
   const {
     actions: { getAllMeals, getUserMealPreferences },
     loadingRecipes,
@@ -27,6 +35,39 @@ const Profile = () => {
     maxReadyTime: 120,
   };
 
+  const uploadProfilePic = async (e) => {
+    const imgFile = e.target.files;
+    const data = new FormData();
+    data.append("file", imgFile[0]);
+    data.append("upload_preset", "HealthAdapted");
+    setLoadingPicture(true);
+    const uploadPic = await fetch(
+      "https://api.cloudinary.com/v1_1/dfekpka0x/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const picture = await uploadPic.json();
+    setUserPicture({ ...userPicture, profilePicture: picture.secure_url });
+    setLoadingPicture(false);
+  };
+
+  const updateUser = async () => {
+    const postPicture = await fetch("/update-user/", {
+      method: "POST",
+      body: JSON.stringify(userPicture),
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+    });
+    await postPicture.json();
+    const something = await fetch(`/get-user-photo/${user.email}`);
+    const photo = await something.json();
+    setImage(photo.data);
+  };
+
   const getSavedPreferences = async () => {
     const res = await fetch(`/get-user-preferences/${user.email}`, {
       method: "GET",
@@ -36,8 +77,15 @@ const Profile = () => {
     getUserMealPreferences(data.data);
   };
 
+  const getUserPhoto = async () => {
+    const res = await fetch(`/get-user-photo/${user.email}`);
+    const picture = await res.json();
+    setImage(picture.data);
+  };
+
   useEffect(() => {
     getSavedPreferences();
+    getUserPhoto();
   }, [user]);
 
   const handleStateNumbers = (optionName, e) => {
@@ -47,14 +95,7 @@ const Profile = () => {
   };
   const [query, setQuery] = useState(initialQuery);
 
-  if (isAuthenticated) {
-    console.log(user);
-  }
-
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
-
+  //these are the preselected options needed to set preference using complex search with our api //
   const cuisineOptions = [
     "African",
     "American",
@@ -176,13 +217,27 @@ const Profile = () => {
     setQuery(initialQuery);
     getSavedPreferences();
   };
-  console.log("hi", query);
 
   return (
     isAuthenticated && (
       <>
         <AccountInfo>
-          <ProfilePhoto src={user.picture} alt={user.name} />
+          {image ? (
+            <ProfilePhoto src={image} />
+          ) : (
+            <ProfilePhoto src={user.picture} />
+          )}
+
+          <input
+            required
+            type="file"
+            name="file"
+            placeholder="Upload a profile picture"
+            onChange={uploadProfilePic}
+          />
+          <SavePhotoButton className="bn632-hover bn19" onClick={updateUser}>
+            Save
+          </SavePhotoButton>
           <h3>{user.name}</h3>
         </AccountInfo>
         <PreferenceWrapper>
@@ -310,7 +365,7 @@ const Profile = () => {
           </form>
         </PreferenceWrapper>
         <ButtonWrapper>
-          <button className="bn632-hover bn19" onClick={onSelectHandler}>
+          <button className="buttonstyle-hover click" onClick={onSelectHandler}>
             Save preferences
           </button>
         </ButtonWrapper>
@@ -371,7 +426,7 @@ const Profile = () => {
           )
         )}
         <ButtonWrapper>
-          <button className="bn632-hover bn19" onClick={resetHandler}>
+          <button className="buttonstyle-hover click" onClick={resetHandler}>
             Reset
           </button>
         </ButtonWrapper>
@@ -435,4 +490,6 @@ const LoadingSpinnerWrap = styled.div`
   top: 80%;
   left: 39%;
 `;
+
+const SavePhotoButton = styled.button``;
 export default Profile;

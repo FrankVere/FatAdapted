@@ -12,7 +12,7 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.bn632-hover {
+.buttonstyle-hover {
   font-family: "Roboto Flex", sans-serif;
   width: 100px;
   height: 20px;
@@ -30,18 +30,18 @@ body {
   transition: all .4s ease-in-out;
 }
 
-.bn632-hover:hover {
+.buttonstyle-hover:hover {
   background-position: 100% 0;
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
 }
 
-.bn632-hover:focus {
+.buttonstyle-hover:focus {
   outline: none;
 }
 
-.bn632-hover.bn19 {
+.buttonstyle-hover.click {
   background-image: linear-gradient(
     to right,
     #f5ce62,
@@ -96,7 +96,6 @@ body {
   .nav-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
   }
   
   .nav-list a {

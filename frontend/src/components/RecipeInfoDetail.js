@@ -43,7 +43,7 @@ const RecipeInfoDetail = () => {
           </RecipeImageWrapper>
           <ButtonContainer>
             <AddMealPlan />
-            <button className="bn632-hover bn19" onClick={handleLiked}>
+            <button className="buttonstyle-hover click" onClick={handleLiked}>
               Like
             </button>
           </ButtonContainer>

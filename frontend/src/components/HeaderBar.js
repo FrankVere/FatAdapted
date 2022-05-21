@@ -4,13 +4,18 @@ import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const HeaderBar = () => {
   const { user, isAuthenticated } = useAuth0();
 
+  let navigate = useNavigate();
+  const handleNav = () => {
+    navigate("/");
+  };
   return (
     <Container>
-      <LogoStyled src={logo} />
+      <LogoStyled onClick={handleNav} src={logo} />
       <div>{user && isAuthenticated ? <LogoutButton /> : <LoginButton />}</div>
     </Container>
   );

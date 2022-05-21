@@ -13,16 +13,14 @@ const MealList = () => {
   const handleNav = (id) => {
     navigate(`/${id}`);
   };
-  console.log(allMeals);
+
   return (
     <>
       {allMeals.map((meal) => {
         return (
           <Wrapper>
-            {/* <div style={{ width: "150px", textAlign: "center" }}> */}
             <StyledImg onClick={() => handleNav(meal.id)} src={meal.image} />
             <span className="homepageText">{meal.title}</span>
-            {/* </div> */}
           </Wrapper>
         );
       })}

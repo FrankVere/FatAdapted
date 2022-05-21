@@ -13,6 +13,8 @@ const {
   getPreferenceRecipes,
   getUserPreferences,
   postUserPreference,
+  updateUser,
+  getUserPhoto,
 } = require("./handlers");
 
 const PORT = 8000;
@@ -40,11 +42,13 @@ express()
   .get("/get-liked-recipes/:userInfo/", getLikedRecipes)
   .get("/get-preference-recipes/", getPreferenceRecipes)
   .get("/get-user-preferences/:userInfo/", getUserPreferences)
+  .get("/get-user-photo/:userInfo/", getUserPhoto)
   .post("/get-meal-plan/", getMealPlanRecipes)
   .post("/post-user/", postUserHandler)
   .post("/post-liked-recipe/", postLikedRecipe)
   .post("/post-meal-plan/", postMealPlan)
   .post("/post-user-preference/", postUserPreference)
+  .post("/update-user/", updateUser)
   .delete("/delete-liked-recipe/", deleteLikedRecipe)
 
   .get("*", (req, res) => {

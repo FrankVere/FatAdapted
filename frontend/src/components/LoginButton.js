@@ -7,7 +7,7 @@ const LoginButton = () => {
 
   return (
     <ButtonStyled
-      className="bn632-hover bn19"
+      className="buttonstyle-hover click"
       onClick={() => {
         loginWithRedirect();
       }}

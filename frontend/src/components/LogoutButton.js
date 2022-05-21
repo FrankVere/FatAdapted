@@ -7,7 +7,7 @@ const LogoutButton = () => {
 
   return (
     <ButtonStyled
-      className="bn632-hover bn19"
+      className="buttonstyle-hover click"
       onClick={() => logout({ returnTo: window.location.origin })}
     >
       Log Out

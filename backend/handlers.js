@@ -319,6 +319,46 @@ const getUserPreferences = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  const { userInfo, profilePicture } = req.body;
+  console.log(req.body);
+  try {
+    const client = await new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("FatAdapted");
+    await db
+      .collection("users")
+      .updateOne(
+        { email: userInfo },
+        { $set: { profilePicture: profilePicture } }
+      );
+    return res.status(200).json({
+      status: 200,
+      message: "Updated Profile Photo",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const getUserPhoto = async (req, res) => {
+  const { userInfo } = req.params;
+  try {
+    const client = await new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("FatAdapted");
+    const userProfile = await db
+      .collection("users")
+      .findOne({ email: userInfo });
+    return res.status(200).json({
+      status: 200,
+      message: "Found profile photo!",
+      data: userProfile.profilePicture,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getRecipes,
   getSingleRecipeInfo,
@@ -331,4 +371,6 @@ module.exports = {
   deleteLikedRecipe,
   getPreferenceRecipes,
   getUserPreferences,
+  updateUser,
+  getUserPhoto,
 };

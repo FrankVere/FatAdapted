@@ -14,30 +14,33 @@ const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
     5: "Saturday",
     6: "Sunday",
   };
-  console.log(mealPlanRecipes);
 
-  return (
-    <CardWrapper>
-      <Day
-        onClick={() => {
-          setDisplaying(!displaying);
-        }}
-      >
-        {dayByIndex[index]}
-      </Day>
+  console.log(recipeIDs);
 
-      <RecipeList displaying={displaying}>
-        {recipeIDs.map((id) => {
-          return (
-            <RecipeByDay mealPlanRecipes={mealPlanRecipes} recipeIDs={id} />
-          );
-        })}
-      </RecipeList>
-    </CardWrapper>
-  );
+  if (recipeIDs) {
+    return (
+      <CardWrapper>
+        <Day
+          onClick={() => {
+            setDisplaying(!displaying);
+          }}
+        >
+          {dayByIndex[index]}
+        </Day>
+
+        <RecipeList displaying={displaying}>
+          {recipeIDs.map((id) => {
+            console.log(`This map is working!`);
+            return (
+              <RecipeByDay mealPlanRecipes={mealPlanRecipes} recipeIDs={id} />
+            );
+          })}
+          No recipe found in this day
+        </RecipeList>
+      </CardWrapper>
+    );
+  }
 };
-
-export default MealPlanDay;
 
 const CardWrapper = styled.div`
   margin-left: 24px;
@@ -55,3 +58,5 @@ const Day = styled.div`
 const RecipeList = styled.div`
   display: ${(p) => (p.displaying ? "block" : "none")};
 `;
+
+export default MealPlanDay;
