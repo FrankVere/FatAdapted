@@ -62,7 +62,8 @@ const ContainerCard = styled.div`
   height: 300px;
   width: 85vw;
   border: solid;
-  background-color: #ffbb99;
+  background-color: #f5ce62;
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
 `;
 
 const StyledRecipeImage = styled.img`

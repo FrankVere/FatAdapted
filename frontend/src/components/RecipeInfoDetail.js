@@ -1,14 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { MealContext } from "../MealContext";
 import AddMealPlan from "./AddMealPlan";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const RecipeInfoDetail = () => {
-  const { isAuthenticated, isLoading, user } = useAuth0();
-
-  // if (isAuthenticated && !isLoading) {
-  // }
+  const { user } = useAuth0();
 
   const {
     state: { singleRecipeInfo },
@@ -67,10 +64,13 @@ const StyledHeader = styled.h2`
 const StyledSummary = styled.p`
   text-align: center;
   text-decoration: none;
+  padding-left: 5px;
+  padding-right: 5px;
 `;
 const StyledRecipeImage = styled.img`
   width: 300px;
   margin-bottom: 15px;
+  border-radius: 20px;
 `;
 const RecipeImageWrapper = styled.div`
   margin-left: 45px;

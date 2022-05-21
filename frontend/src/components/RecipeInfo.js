@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MealContext } from "../MealContext";
 import { useParams } from "react-router-dom";
 import RecipeInfoDetail from "./RecipeInfoDetail";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 const RecipeInfo = () => {
   const {
@@ -16,10 +16,16 @@ const RecipeInfo = () => {
 
   const { recipeName } = useParams();
 
-  const _id = singleRecipeInfo.id;
+  const navigate = useNavigate();
 
+  const handleNav = (id) => {
+    navigate(`/${id}`);
+  };
+
+  const _id = singleRecipeInfo.id;
   const [imgSrc, setImgSrc] = useState("");
   const [ingredientImgSrc, setIngredientImgSrc] = useState("");
+  const [similarRecipes, setSimilarRecipes] = useState([]);
 
   const getSingleRecipe = () => {
     fetch(`/get-single-recipe-info/${recipeName}`, {
@@ -64,13 +70,31 @@ const RecipeInfo = () => {
     });
   };
 
+  const getSimilarRecipes = () => {
+    fetch(
+      `https://api.spoonacular.com/recipes/${_id}/similar?apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}&number=3`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setSimilarRecipes(data);
+      });
+  };
+
   useEffect(() => {
     getSingleRecipe();
     getNutritonLabel();
     getIngredientsImages();
+    getSimilarRecipes();
   }, [_id]);
 
-  console.log(singleRecipeInfo);
+  console.log("similarRecipes");
 
   return (
     <Container>
@@ -78,7 +102,6 @@ const RecipeInfo = () => {
         <>
           <RecipeInfoDetail />
           <StyledHeader>Ingredients required </StyledHeader>
-
           <img src={ingredientImgSrc} />
           <ServingPrepWrapper>
             <p>Serves: {singleRecipeInfo.servings}</p>
@@ -104,6 +127,24 @@ const RecipeInfo = () => {
           <LabelWrapper>
             <StyledNutritionLabel src={imgSrc} />
           </LabelWrapper>
+          <Wrapper>
+            {similarRecipes.map((meal) => (
+              <>
+                <StyledSimilarRecipesWrapper>
+                  <StyledImage
+                    onClick={() => handleNav(meal.id)}
+                    src={`https://spoonacular.com/recipeImages/${meal.id}-312x231.jpg`}
+                  />
+                  <span
+                    className="homepageText"
+                    style={{ fontSize: "12px", display: "block" }}
+                  >
+                    {meal.title}
+                  </span>
+                </StyledSimilarRecipesWrapper>
+              </>
+            ))}
+          </Wrapper>
         </>
       ) : (
         <SpinnerWrapper>
@@ -113,6 +154,10 @@ const RecipeInfo = () => {
     </Container>
   );
 };
+const StyledImage = styled.img`
+  width: 100px;
+  border-radius: 10%;
+`;
 
 const Instructions = styled.div`
   text-align: left;
@@ -161,5 +206,18 @@ const SpinnerWrapper = styled.div`
   left: 50%;
   transform: translateY(-50%);
   transform: translateX(-50%);
+`;
+
+const StyledSimilarRecipesWrapper = styled.div`
+  padding: 20px;
+`;
+const Wrapper = styled.div`
+  padding: 22px;
+  width: 150px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 87vw;
 `;
 export default RecipeInfo;

@@ -75,9 +75,7 @@ const MealPlan = () => {
 const StyledSpinner = styled.div`
   position: absolute;
   top: 40%;
-  left: 50%;
-  transform: translateY(-50%);
-  transform: translateX(-50%);
+  left: 40%;
 `;
 
 export default MealPlan;

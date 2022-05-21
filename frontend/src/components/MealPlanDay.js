@@ -19,6 +19,7 @@ const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
     return (
       <CardWrapper>
         <Day
+          className="bold"
           onClick={() => {
             setDisplaying(!displaying);
           }}

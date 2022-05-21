@@ -23,8 +23,6 @@ const AddMealPlan = () => {
     setAddMealPlanButton(!addMealPlanButton);
   };
 
-  console.log("day", mealPlan);
-
   useEffect(() => {
     fetch("/post-meal-plan/", {
       method: "POST",
