@@ -235,12 +235,9 @@ const Profile = () => {
             placeholder="Upload a profile picture"
             onChange={uploadProfilePic}
           />
-          <SavePhotoButton
-            className="buttonstyle-hover click"
-            onClick={updateUser}
-          >
+          <button className="buttonstyle-hover click" onClick={updateUser}>
             Save
-          </SavePhotoButton>
+          </button>
           <h3 className="bold">{user.name}</h3>
         </AccountInfo>
         <PreferenceWrapper>
@@ -358,6 +355,7 @@ const Profile = () => {
                 <b className="bold">Max Ready Time:</b>
               </label>
               <input
+                style={{ backgroundColor: "#f5ce62", border: "none" }}
                 className="input"
                 type="number"
                 onChange={(e) => {
@@ -459,7 +457,7 @@ const AccountInfo = styled.div`
 
 const WrapperPreferences = styled.div`
   border: 2px solid #f5ce62;
-  padding-inline: 5px;
+  padding-left: 5px;
   text-align: left;
   margin-left: 5px;
   border-radius: 20px;
@@ -496,5 +494,4 @@ const LoadingSpinnerWrap = styled.div`
   left: 39%;
 `;
 
-const SavePhotoButton = styled.button``;
 export default Profile;

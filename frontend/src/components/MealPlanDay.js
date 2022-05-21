@@ -15,8 +15,6 @@ const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
     6: "Sunday",
   };
 
-  console.log(recipeIDs);
-
   if (recipeIDs) {
     return (
       <CardWrapper>
@@ -30,7 +28,6 @@ const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
 
         <RecipeList displaying={displaying}>
           {recipeIDs.map((id) => {
-            console.log(`This map is working!`);
             return (
               <RecipeByDay mealPlanRecipes={mealPlanRecipes} recipeIDs={id} />
             );

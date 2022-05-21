@@ -23,7 +23,6 @@ const RecipeRandomizer = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMealInfo(data);
       })
       .catch((error) => {

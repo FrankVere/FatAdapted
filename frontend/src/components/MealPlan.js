@@ -52,27 +52,32 @@ const MealPlan = () => {
 
   if (isLoaded) {
     return (
-      <StyledWrapper>
+      <>
         {mealPlanRecipeIDs.data &&
           mealPlanRecipeIDs.data.map((day, index) => {
             return (
-              <MealPlanWrapper>
+              <>
                 <MealPlanDay
                   mealPlanRecipes={mealPlanRecipes}
                   recipeIDs={day}
                   index={index}
                 />
-              </MealPlanWrapper>
+              </>
             );
           })}
-      </StyledWrapper>
+      </>
     );
   } else {
-    return <div className="lds-hourglass" />;
+    return <StyledSpinner className="lds-hourglass" />;
   }
 };
 
-export default MealPlan;
+const StyledSpinner = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+`;
 
-const StyledWrapper = styled.div``;
-const MealPlanWrapper = styled.div``;
+export default MealPlan;

@@ -18,7 +18,7 @@ const LikedRecipes = () => {
 
   const userInfo = user.email;
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleNav = (id) => {
     navigate(`/${id}`);
@@ -61,7 +61,9 @@ const LikedRecipes = () => {
 
   return (
     <>
-      <h2 style={{ textAlign: "center" }}>My Liked Recipes!</h2>
+      <h2 className="bold" style={{ textAlign: "center" }}>
+        My Liked Recipes!
+      </h2>
       <Wrapper>
         {allLikedRecipes ? (
           allLikedRecipes.map((likedRecipe) => {
@@ -81,7 +83,6 @@ const LikedRecipes = () => {
         ) : (
           <WrapperSpinner>
             <div className="lds-hourglass" />
-            Loading your liked recipes...
           </WrapperSpinner>
         )}
       </Wrapper>
@@ -95,6 +96,7 @@ const WrapperLiked = styled.div`
   width: 150px;
   text-align: center;
 `;
+
 const StyledImg = styled.img`
   width: 150px;
   border-radius: 10%;
@@ -106,7 +108,6 @@ const WrapperSpinner = styled.div`
   left: 50%;
   transform: translateY(-50%);
   transform: translateX(-50%);
-  text-align: center;
 `;
 
 const Wrapper = styled.div`
@@ -114,6 +115,8 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-const RecipeName = styled.span``;
+const RecipeName = styled.span`
+  font-style: italic;
+`;
 
 export default LikedRecipes;

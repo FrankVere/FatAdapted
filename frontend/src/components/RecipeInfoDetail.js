@@ -7,9 +7,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 const RecipeInfoDetail = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
 
-  if (isAuthenticated && !isLoading) {
-    console.log(user);
-  }
+  // if (isAuthenticated && !isLoading) {
+  // }
+
   const {
     state: { singleRecipeInfo },
   } = useContext(MealContext);
@@ -37,7 +37,9 @@ const RecipeInfoDetail = () => {
       {Object.keys(singleRecipeInfo).length > 0 && (
         <>
           {" "}
-          <StyledHeader>{singleRecipeInfo.title} </StyledHeader>
+          <StyledHeader className="bold">
+            {singleRecipeInfo.title}{" "}
+          </StyledHeader>
           <RecipeImageWrapper>
             <StyledRecipeImage src={singleRecipeInfo.image} />
           </RecipeImageWrapper>
@@ -60,7 +62,7 @@ const RecipeInfoDetail = () => {
 
 const StyledHeader = styled.h2`
   text-align: center;
-  font-size: 30px;
+  font-size: 27px;
 `;
 const StyledSummary = styled.p`
   text-align: center;
