@@ -18,6 +18,6 @@ const LoginButton = () => {
 };
 
 const ButtonStyled = styled.button`
-  margin-top: 6px;
+  margin-top: 7px;
 `;
 export default LoginButton;

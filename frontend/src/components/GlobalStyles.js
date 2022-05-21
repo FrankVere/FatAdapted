@@ -1,17 +1,31 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+
 body {
     font-family: 'Roboto Flex', sans-serif;
     margin: 0;
     box-sizing: border-box;
 }
-//buttons//
 
 .homepageText {
   font-family: 'Roboto', sans-serif;
 }
 
+.bold {
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.input {
+  margin-left: 10px;
+  width: 80px;
+  background-color: #f5ce62; 
+  border: none; 
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+  padding: 2px;
+}
+
+//buttons//
 .buttonstyle-hover {
   font-family: "Roboto Flex", sans-serif;
   width: 100px;
@@ -114,5 +128,24 @@ body {
     justify-content: center;
     font-size: 12px;
   }
+
+  .box select {
+  background-color: #f5ce62;
+  color: white;
+  padding: 3px;
+  border: none;
+  font-size: 15px;
+
+  box-shadow: 0 5px 10px rgba(236, 76, 76, 1);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none; 
+  }
+
+.box:hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 
 `;

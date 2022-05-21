@@ -235,16 +235,19 @@ const Profile = () => {
             placeholder="Upload a profile picture"
             onChange={uploadProfilePic}
           />
-          <SavePhotoButton className="bn632-hover bn19" onClick={updateUser}>
+          <SavePhotoButton
+            className="buttonstyle-hover click"
+            onClick={updateUser}
+          >
             Save
           </SavePhotoButton>
-          <h3>{user.name}</h3>
+          <h3 className="bold">{user.name}</h3>
         </AccountInfo>
         <PreferenceWrapper>
           <form>
             <InputWrapper>
               <label>
-                <b>Cuisine:</b>
+                <b className="bold">Cuisine:</b>
               </label>
               <Options
                 list={cuisineOptions}
@@ -256,7 +259,7 @@ const Profile = () => {
             </InputWrapper>
             <InputWrapper>
               <label>
-                <b>Intolerances:</b>
+                <b className="bold">Intolerances:</b>
               </label>
               <Options
                 list={intolerances}
@@ -268,7 +271,7 @@ const Profile = () => {
             </InputWrapper>
             <InputWrapper>
               <label>
-                <b>Diet:</b>
+                <b className="bold">Diet:</b>
               </label>
               <Options
                 list={diet}
@@ -280,7 +283,7 @@ const Profile = () => {
             </InputWrapper>
             <InputWrapper>
               <label>
-                <b>Type of Meal:</b>
+                <b className="bold">Type of Meal:</b>
               </label>
               <Options
                 list={type}
@@ -292,7 +295,7 @@ const Profile = () => {
             </InputWrapper>
             <InputWrapper>
               <label>
-                <b>Max Carbs:</b>
+                <b className="bold">Max Carbs:</b>
               </label>
               <input
                 className="input"
@@ -304,7 +307,7 @@ const Profile = () => {
             </InputWrapper>
             <InputWrapper>
               <label>
-                <b>Max Protein:</b>
+                <b className="bold">Max Protein:</b>
               </label>
               <input
                 className="input"
@@ -316,7 +319,7 @@ const Profile = () => {
             </InputWrapper>
             <InputWrapper>
               <label>
-                <b>Max Calories:</b>
+                <b className="bold">Max Calories: </b>
               </label>
               <input
                 className="input"
@@ -328,7 +331,7 @@ const Profile = () => {
             </InputWrapper>
             <InputWrapper>
               <label>
-                <b>Max Fat:</b>
+                <b className="bold">Max Fat:</b>
               </label>
               <input
                 className="input"
@@ -340,7 +343,7 @@ const Profile = () => {
             </InputWrapper>
             <InputWrapper>
               <label>
-                <b>Max Caffeine:</b>
+                <b className="bold">Max Caffeine:</b>
               </label>
               <input
                 className="input"
@@ -352,7 +355,7 @@ const Profile = () => {
             </InputWrapper>
             <InputWrapper>
               <label>
-                <b>Max Ready Time:</b>
+                <b className="bold">Max Ready Time:</b>
               </label>
               <input
                 className="input"
@@ -369,50 +372,56 @@ const Profile = () => {
             Save preferences
           </button>
         </ButtonWrapper>
-        <h3 style={{ textAlign: "center" }}>Saved Preferences</h3>
+        <h3 className="bold" style={{ textAlign: "center" }}>
+          Saved Preferences
+        </h3>
         {savedPreferences && loadingRecipes === false ? (
           <>
             <WrapperPreferences>
               {" "}
               <p>
-                <b>Cuisine: </b>
+                <b className="bold">Cuisine: </b>
                 {savedPreferences.cuisine
                   .replace(",", "")
                   .replaceAll(",", ", ")}
               </p>
               <p>
-                <b>Intolerances: </b>
+                <b className="bold">Intolerances: </b>
                 {savedPreferences.intolerances
                   .replace(",", "")
                   .replaceAll(",", ", ")}
               </p>
               <p>
-                <b>Type: </b>
+                <b className="bold">Type: </b>
                 {savedPreferences.type.replace(",", "").replaceAll(",", ", ")}
               </p>
               <p>
-                <b>Diet: </b>
+                <b className="bold">Diet: </b>
                 {savedPreferences.diet
                   .replace(",", "")
                   .replaceAll(",", ", ")}{" "}
               </p>
               <p>
-                <b>Maximum Carbs:</b> {savedPreferences.maxCarbs}
+                <b className="bold">Maximum Carbs:</b>{" "}
+                {savedPreferences.maxCarbs}
               </p>
               <p>
-                <b>Max Protein:</b> {savedPreferences.maxProtein}
+                <b className="bold">Max Protein:</b>{" "}
+                {savedPreferences.maxProtein}
               </p>
               <p>
-                <b>Max Calories:</b> {savedPreferences.maxCalories}
+                <b className="bold">Max Calories:</b>{" "}
+                {savedPreferences.maxCalories}
               </p>
               <p>
-                <b>Max Fat:</b> {savedPreferences.maxFat}
+                <b className="bold">Max Fat:</b> {savedPreferences.maxFat}
               </p>
               <p>
-                <b>Max Cafferine:</b> {savedPreferences.maxCaffeine}
+                <b className="bold">Max Cafferine:</b>{" "}
+                {savedPreferences.maxCaffeine}
               </p>
               <p>
-                <b>Max Ready Time: </b>
+                <b className="bold">Max Ready Time: </b>
                 {savedPreferences.maxReadyTime}
               </p>
             </WrapperPreferences>
@@ -440,10 +449,6 @@ const InputWrapper = styled.div`
   justify-content: left;
   align-items: center;
   padding: 5px;
-  .input {
-    margin-left: 10px;
-    width: 40px;
-  }
 `;
 
 const AccountInfo = styled.div`

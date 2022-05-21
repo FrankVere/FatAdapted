@@ -12,7 +12,6 @@ const RecipeByDay = ({ recipeIDs, mealPlanRecipes }) => {
 
   useEffect(() => {
     if (mealPlanRecipes) {
-      console.log(mealPlanRecipes, recipeIDs);
       setThisRecipeData(
         mealPlanRecipes.filter((meal) => {
           return meal.id == recipeIDs;
@@ -26,24 +25,38 @@ const RecipeByDay = ({ recipeIDs, mealPlanRecipes }) => {
 
     return (
       <ContainerCard>
-        This is a recipe
         <Wrapper key={id}>
-          <StyledRecipeImage onClick={handleNav} src={image} />
+          <PhotoWrapper>
+            <StyledRecipeImage onClick={handleNav} src={image} />
+          </PhotoWrapper>
           <StyledTitle>{title}</StyledTitle>
-          <StyledNutritionalInfo>
-            <div>Calories: {nutrition.nutrients[0].amount}</div>
-            <div>Fat: {nutrition.nutrients[1].amount}</div>
-            <div>Carbohydrates: {nutrition.nutrients[3].amount}</div>
-            <div>Sugar: {nutrition.nutrients[5].amount}</div>
-            <div>Protein: {nutrition.nutrients[8].amount}</div>
-          </StyledNutritionalInfo>
+          <div>
+            <b className="bold">Calories: </b> {nutrition.nutrients[0].amount}
+          </div>
+          <div>
+            <b className="bold">Fat: </b> {nutrition.nutrients[1].amount}
+          </div>
+          <div>
+            <b className="bold">Carbohydrates: </b>
+            {nutrition.nutrients[3].amount}
+          </div>
+          <div>
+            <b className="bold">Sugar: </b>
+            {nutrition.nutrients[5].amount}
+          </div>
+          <div>
+            <b className="bold">Protein: </b>
+            {nutrition.nutrients[8].amount}
+          </div>
         </Wrapper>
       </ContainerCard>
     );
   }
 };
 
-const StyledTitle = styled.h2``;
+const StyledTitle = styled.h2`
+  font-size: 18px;
+`;
 
 const ContainerCard = styled.div`
   height: 300px;
@@ -53,15 +66,18 @@ const ContainerCard = styled.div`
 `;
 
 const StyledRecipeImage = styled.img`
-  height: 120px;
-  width: 120px;
-  margin-left: 110px;
+  width: 150px;
+  border-radius: 10%;
+  margin-top: 10px;
 `;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
 `;
-const StyledNutritionalInfo = styled.div``;
+
+const PhotoWrapper = styled.div`
+  justify-content: center;
+`;
 
 export default RecipeByDay;

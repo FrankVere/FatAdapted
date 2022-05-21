@@ -81,6 +81,7 @@ const LikedRecipes = () => {
         ) : (
           <WrapperSpinner>
             <div className="lds-hourglass" />
+            Loading your liked recipes...
           </WrapperSpinner>
         )}
       </Wrapper>
@@ -105,6 +106,7 @@ const WrapperSpinner = styled.div`
   left: 50%;
   transform: translateY(-50%);
   transform: translateX(-50%);
+  text-align: center;
 `;
 
 const Wrapper = styled.div`

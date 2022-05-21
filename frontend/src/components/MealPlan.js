@@ -27,9 +27,9 @@ const MealPlan = () => {
     });
     const recipeIDs = await getMealPlanID.json();
     getMealPlanRecipeIDs(recipeIDs);
-    console.log(recipeIDs);
+
     const flatRecipeIds = Array.prototype.concat.apply([], recipeIDs.data);
-    console.log(recipeIDs);
+
     const getRecipes = await fetch(
       `https://api.spoonacular.com/recipes/informationBulk?includeNutrition=true&ids=${flatRecipeIds.toString()}&apiKey=${
         process.env.REACT_APP_SPOONACULAR_API_KEY
@@ -67,6 +67,8 @@ const MealPlan = () => {
           })}
       </StyledWrapper>
     );
+  } else {
+    return <div className="lds-hourglass" />;
   }
 };
 
