@@ -9,7 +9,7 @@ const AddMealPlan = () => {
     actions: { updateMealPlan },
   } = useContext(MealContext);
 
-  const { user, isLoading } = useAuth0();
+  const { user } = useAuth0();
   const userInfo = user.email;
   const weeklyMealPlan = mealPlan;
   const [selectedDay, setSelectedDay] = useState();

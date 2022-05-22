@@ -68,11 +68,15 @@ const MealPlan = () => {
       </>
     );
   } else {
-    return <StyledSpinner className="lds-hourglass" />;
+    return (
+      <StyledSpinnerWrapper>
+        <div className="lds-hourglass" />;
+      </StyledSpinnerWrapper>
+    );
   }
 };
 
-const StyledSpinner = styled.div`
+const StyledSpinnerWrapper = styled.div`
   position: absolute;
   top: 40%;
   left: 40%;
