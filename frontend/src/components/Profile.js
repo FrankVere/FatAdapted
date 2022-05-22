@@ -490,8 +490,8 @@ const ButtonWrapper = styled.div`
 
 const LoadingSpinnerWrap = styled.div`
   position: absolute;
-  top: 80%;
-  left: 39%;
+  top: 85%;
+  left: 40%;
 `;
 
 export default Profile;

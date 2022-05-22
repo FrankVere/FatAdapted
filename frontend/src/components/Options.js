@@ -12,10 +12,10 @@ const Options = ({ list, setQuery, query, defaultQuery, optionName }) => {
     <Wrapper>
       <div className="box">
         <select onChange={onChangeHandler}>
-          <option>{defaultQuery}</option>
-          {list.map((item) => {
-            return <option value={item}>{item}</option>;
-          })}
+          <option disabled>{defaultQuery}</option>
+          {list.map((item) => (
+            <option value={item}>{item}</option>
+          ))}
         </select>
       </div>
     </Wrapper>

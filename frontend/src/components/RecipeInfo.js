@@ -23,6 +23,7 @@ const RecipeInfo = () => {
   };
 
   const _id = singleRecipeInfo.id;
+
   const [imgSrc, setImgSrc] = useState("");
   const [ingredientImgSrc, setIngredientImgSrc] = useState("");
   const [similarRecipes, setSimilarRecipes] = useState([]);
@@ -92,9 +93,7 @@ const RecipeInfo = () => {
     getNutritonLabel();
     getIngredientsImages();
     getSimilarRecipes();
-  }, [_id]);
-
-  console.log("similarRecipes");
+  }, [_id, recipeName]);
 
   return (
     <Container>
@@ -115,11 +114,10 @@ const RecipeInfo = () => {
             <Instructions>
               {Object.keys(singleRecipeInfo).length > 0 && (
                 <ol>
-                  {singleRecipeInfo.analyzedInstructions[0].steps.map(
-                    (step) => (
-                      <li>{step.step}</li>
-                    )
-                  )}
+                  {singleRecipeInfo.analyzedInstructions.length > 0 &&
+                    singleRecipeInfo.analyzedInstructions[0].steps.map(
+                      (step) => <li>{step.step}</li>
+                    )}
                 </ol>
               )}
             </Instructions>
@@ -128,6 +126,9 @@ const RecipeInfo = () => {
             <StyledNutritionLabel src={imgSrc} />
           </LabelWrapper>
           <Wrapper>
+            <h2 className="bold" style={{ alignText: "center" }}>
+              Try these similar recipes!
+            </h2>
             {similarRecipes.map((meal) => (
               <>
                 <StyledSimilarRecipesWrapper>

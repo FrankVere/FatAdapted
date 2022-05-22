@@ -28,12 +28,15 @@ const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
         </Day>
 
         <RecipeList displaying={displaying}>
-          {recipeIDs.map((id) => {
-            return (
-              <RecipeByDay mealPlanRecipes={mealPlanRecipes} recipeIDs={id} />
-            );
-          })}
-          No recipe found in this day
+          {recipeIDs.length > 0 ? (
+            recipeIDs.map((id) => {
+              return (
+                <RecipeByDay mealPlanRecipes={mealPlanRecipes} recipeIDs={id} />
+              );
+            })
+          ) : (
+            <div>No Recipe here</div>
+          )}
         </RecipeList>
       </CardWrapper>
     );
