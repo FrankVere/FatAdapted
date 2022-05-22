@@ -7,7 +7,7 @@ const Options = ({ list, setQuery, query, defaultQuery, optionName }) => {
     newQuery[optionName] = newQuery[optionName] + "," + e.target.value;
     setQuery(newQuery);
   };
-
+  console.log(newQuery);
   return (
     <Wrapper>
       <div className="box">
