@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { MealContext } from "../MealContext";
 import MealList from "./MealList";
@@ -48,4 +48,5 @@ const SpinnerWrapper = styled.div`
   left: 20%;
   text-align: center;
 `;
+
 export default Homepage;
