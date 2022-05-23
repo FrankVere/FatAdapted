@@ -256,7 +256,7 @@ const getPreferenceRecipes = async (req, res) => {
   } = req.query;
   try {
     const result = await request(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOONACULAR_API_KEY}&number=6&cuisine=${cuisine}&intolerances=${intolerances}&diet=${diet}&type=${type}&maxCarbs=${maxCarbs}&maxProtein=${maxProtein}&maxFat=${maxFat}&maxCaffeine=${maxCaffeine}&maxCalories=${maxCalories}&maxReadyTime=${maxReadyTime}`,
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${SPOONACULAR_API_KEY}&number=15&cuisine=${cuisine}&intolerances=${intolerances}&diet=${diet}&type=${type}&maxCarbs=${maxCarbs}&maxProtein=${maxProtein}&maxFat=${maxFat}&maxCaffeine=${maxCaffeine}&maxCalories=${maxCalories}&maxReadyTime=${maxReadyTime}`,
       { headers: { Accept: "application/json" } }
     );
     return res.status(200).json({

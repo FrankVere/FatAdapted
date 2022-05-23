@@ -70,7 +70,7 @@ const MealPlan = () => {
   } else {
     return (
       <StyledSpinnerWrapper>
-        <div className="lds-hourglass" />;
+        <div className="lds-hourglass" />
       </StyledSpinnerWrapper>
     );
   }

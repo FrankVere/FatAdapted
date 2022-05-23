@@ -35,7 +35,7 @@ const MealPlanDay = ({ recipeIDs, index, mealPlanRecipes }) => {
               );
             })
           ) : (
-            <div>No Recipe here</div>
+            <div>No Recipes added</div>
           )}
         </RecipeList>
       </CardWrapper>

@@ -27,7 +27,10 @@ const Homepage = () => {
         </SpinnerWrapper>
       ) : (
         <div>
-          <img src={cookingFam} style={{ width: "390px" }} />
+          <img
+            src={cookingFam}
+            style={{ width: "390px", marginBottom: "10px" }}
+          />
           <Container>
             <RecipeRandomizer />
             <MealList />

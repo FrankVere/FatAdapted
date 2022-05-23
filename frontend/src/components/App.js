@@ -29,7 +29,7 @@ function App() {
         },
       });
     };
-    //get user meal plan from mongodb//
+    //get user meal plan from mongodb and add it to our meal plan state so we don't lose recipes on relog//
     const getUserMealPlan = async () => {
       const userInfo = user.email;
       const res = fetch("/get-meal-plan/", {
@@ -40,6 +40,7 @@ function App() {
       updateMealPlan(data.data);
     };
 
+    //this will trigger a rerender on the home page depending on the users currently saved prefences and show the user only the recipes they want to see //
     const updateHomepageRecipes = async () => {
       const res = await fetch(`/get-user-preferences/${user.email}`, {
         method: "GET",
@@ -66,6 +67,7 @@ function App() {
         });
     };
 
+    // only when the user is logged in and authenticated will we run these following functions (described above) //
     if (isAuthenticated) {
       postUser();
       updateHomepageRecipes();
@@ -88,6 +90,7 @@ function App() {
     }
   }, [isAuthenticated]);
 
+  //here we have the padding bottom added to our app return so that our navbar doesnt conflict with the bottoms of our pages throughout the app //
   return (
     <div style={{ paddingBottom: "120px" }}>
       <BrowserRouter>
