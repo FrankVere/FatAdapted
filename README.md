@@ -33,6 +33,33 @@ HealthAdapted is an online meal planner suitable for all diets! Whether you're k
 
 ## Screenshots
 
+
+![brave_QIHpoADybp](https://user-images.githubusercontent.com/71355155/169697167-397bbe41-1cc2-4220-bd94-e030372f1e7a.png) 
+
+This is our homepage! What we set as preferences dictate the recipes that will be shown here. We can also randomize 3 recipes to appear with the surprise me button. 
+
+![brave_MW79JoX6MY](https://user-images.githubusercontent.com/71355155/169697220-96f56c15-6ddf-4cf7-93d5-9410da12e35a.png)
+
+This is the profile page! We can set our preferences here to include intolerances, cuisine, max nutritional value and so on. You will see your saved preferences at the bottom of the page as well. You can also change your profile photo here.
+
+![brave_UQV9mD4fne](https://user-images.githubusercontent.com/71355155/169697299-44df5668-c597-401b-ad14-9244ced3ac0e.png)
+![brave_1PU4f2Tp00](https://user-images.githubusercontent.com/71355155/169697303-d353fd35-7430-4781-a505-ed8873fa6ef8.png)
+
+This is our meal plan page! Any recipes you add to a day will appear here inside their respective day card. You can redirect to the full info detail by clicking any recipe inside your meal plan and start cooking! 
+
+![brave_DlSmsjmuPf](https://user-images.githubusercontent.com/71355155/169697372-8818fdfc-1b80-4691-8159-dab35861e5d9.png)
+
+This is where all of our liked recipes will be stored. We can save them here for the future and check them out whenever we feel like cooking. 
+
+![brave_BppWjyObEr](https://user-images.githubusercontent.com/71355155/169697404-44e18200-3787-4ac6-9e8c-b84a4fe8c35d.png)
+![brave_1ClEXowexR](https://user-images.githubusercontent.com/71355155/169697464-54c032a1-9187-42c9-b7d3-12d643ae5c82.png)
+
+This is the recipe info page. Here we can add a recipe to our meal plan. we can like a recipe to save it and see all of the information regarding the recipe. Nutritional information, ingredients, cooking instructions and even recipes similar to the one you're currently looking at. 
+
+![brave_1VmqOiPp93](https://user-images.githubusercontent.com/71355155/169697472-bb065347-6abb-45a2-a80f-9b627a92c95d.png)
+
+
+
 ## Reflection
 
 _What we enjoyed_
