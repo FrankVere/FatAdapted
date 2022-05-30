@@ -1,6 +1,6 @@
 # HealthAdapted
 
-Concordia Bootcamps Final Project, Keto Meal Plan/Prepper/Tracker
+Concordia Bootcamps Final Project, Meal Plan/Prepper/Tracker
 
 ## Description of HealthAdapted
 
