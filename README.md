@@ -62,7 +62,7 @@ This is the recipe info page. Here we can add a recipe to our meal plan. we can 
 
 ## Reflection
 
-_What we enjoyed_
+_What I enjoyed_
 
 - Using the Spoonacular API and fetching/manipulating data
 - Creating many different handlers and RESTful endpoints for data manipulation.
